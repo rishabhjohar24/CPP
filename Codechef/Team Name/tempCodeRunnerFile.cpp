@@ -1,0 +1,1 @@
+cout<<temp1<<" "<<temp2<<endl;
