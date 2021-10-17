@@ -1,6 +1,694 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
+int main()
+{
+    int nk, j = 0;
+    string k, s, e;
+    cin >> k >> s;
+    map<int, char> mp;
+    for (int i = 0; i < 26; i++)
+    {
+        mp[i] = 97 + i;
+        //cout << i << " " << mp[i] << "\n";
+    }
+    vector<int> ka(k.size());
+    nk = k.size();
+    vector<pair<int, int>> sa(s.size());
+    for (int i = 0; i < k.size(); i++)
+    {
+        ka[i] = k[i] - 'a';
+    }
+    for (int i = 0; i < s.size(); i++)
+    {
+        int t = (s[i] - 'a' + (ka[j] % 25)) % 25;
+        (!t) ? cout << s[i] : cout << mp[t];
+        j++;
+        j %= nk;
+    }
+    return 0;
+}
+// int main()
+// {
+//     int m, n, p;
+//     cin >> m >> n >> p;
+//     int ans = min(m, n);
+//     if (ans <= p)
+//     {
+//         cout << ans;
+//     }
+//     else
+//     {
+//         ans = min(m, n);
+//         m -= p;
+//         n -= p;
+//         ans = (max(m, n) >= 2 * ans) ? min(m, n) : p + m + n - 2 * ans;
+//     }
+//     cout << ans << "\n";
+//     return 0;
+// }
+
+// string solve(vector<int> s, vector<int> t)
+// {
+//     int n = s.size(), m = t.size();
+//     if (n != m)
+//     {
+//         return "NO";
+//     }
+//     map<int, int> smp;
+//     for (int i = 0; i < n; i++)
+//     {
+//         smp[s[i]]++;
+//     }
+//     for (int i = 0; i < m; i++)
+//     {
+//         if (smp.find(t[i]) == smp.end())
+//         {
+//             smp[t[i]]++;
+//         }
+//         else
+//         {
+//             smp[t[i]]--;
+//         }
+//     }
+//     for (auto i : smp)
+//     {
+//         if (abs(i.second) > 3)
+//         {
+//             return "NO";
+//         }
+//     }
+//     return "YES";
+// }
+// int main()
+// {
+//     int n, m;
+//     cin >> n >> m;
+//     vector<int> s(n), t(m);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> s[i];
+//     }
+//     for (int i = 0; i < m; i++)
+//     {
+//         cin >> t[i];
+//     }
+//     cout << solve(s, t);
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// int rectCount(int n, int m)
+// {
+//     return (m * n * (n + 1) * (m + 1)) / 4;
+// }
+
+// /* driver code */
+// int main()
+// {
+//     int n = 3, m = 2;
+//     cout << rectCount(n, m);
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int SumOfUniqueElements(int *arr, int length);
+// int main()
+// {
+//     int length;
+//     cin >> length;
+//     int *arr = new int[length];
+//     for (int i = 0; i < length; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     int result = SumOfUniqueElements(arr, length);
+//     cout << result << endl;
+//     return 0;
+// }
+// int SumOfUniqueElements(int *arr, int length)
+// {
+//     int sum = 0;
+//     map<int, int> s;
+//     for (int i = 0; i < length; i++)
+//     {
+//         s[arr[i]]++;
+//     }
+//     for (auto i : s)
+//     {
+//         if (i.second == 1)
+//         {
+//             sum += i.first;
+//         }
+//     }
+//     return sum;
+// }
+// int countSubarrays(vector<int> a, int n, int m)
+// {
+//     int count = 0;
+//     for (int i = 0; i < n; i++)
+//     {
+//         int odd = 0;
+//         for (int j = i; j < n; j++)
+//         {
+//             if (a[j] % 2)
+//             {
+//                 odd++;
+//             }
+//             if (odd == m)
+//             {
+//                 count++;
+//             }
+//         }
+//     }
+//     return count;
+// }
+// int main()
+// {
+//     int n, m, ans = 0;
+//     cin >> n;
+//     vector<int> arr(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     cin >> m;
+//     for (int i = 0; i <= m; i++)
+//     {
+//         ans += countSubarrays(arr, n, m);
+//     }
+//     cout << ans << endl;
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int printMaxOfMin(vector<int> arr, int n, int x){
+//     stack<int> s;
+//     vector<int> left(n + 1, 0), right(n + 1, 0), ans(n + 1, 0);
+//     for (int i = 0; i < n; i++){
+//         left[i] = -1;
+//         right[i] = n;
+//     }
+//     for (int i = 0; i < n; i++){
+//         while (!s.empty() && arr[s.top()] >= arr[i]){
+//             s.pop();
+//         }
+//         if (!s.empty()){
+//             left[i] = s.top();
+//         }
+//         s.push(i);
+//     }
+//     while (!s.empty()){
+//         s.pop();
+//     }
+//     for (int i = n - 1; i >= 0; i--){
+//         while (!s.empty() && arr[s.top()] >= arr[i]){
+//             s.pop();
+//         }
+//         if (!s.empty()){
+//             right[i] = s.top();
+//         }
+//         s.push(i);
+//     }
+//     for (int i = 0; i < n; i++){
+//         int len = right[i] - left[i] - 1;
+//         ans[len] = max(ans[len], arr[i]);
+//     }
+
+//     for (int i = n - 1; i >= 1; i--){
+//         ans[i] = max(ans[i], ans[i + 1]);
+//     }
+//     return ans[x];
+// }
+// int main()
+// {
+//     int n, x;
+//     cin >> x >> n;
+//     vector<int> arr(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     cout << printMaxOfMin(arr, n, x) << "\n";
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+
+// using namespace std;
+
+// int kLargest(int a[], int length, int k)
+// {
+//     set<int> s(a, a + length);
+//     set<int>::iterator it = s.begin();
+//     for (int i = 0; i < k - 1; i++)
+//     {
+//         it++;
+//         cout << *it;
+//     }
+//     return *it;
+// }
+
+// int kSmallest(int a[], int length, int k)
+// {
+//     set<int> s(a, a + length);
+//     set<int>::iterator it = s.end();
+//     for (int i = 0; i < k - 1; i++)
+//     {
+//         it--;
+//     }
+//     return *it;
+// }
+
+// int main()
+// {
+//     int a[] = {43, 6, 7, 21, 35, 83, 57, 33};
+//     int l = sizeof(a) / sizeof(a[0]);
+//     int k = 4;
+//     int kLarge = kLargest(a, l, k);
+//     int kSmall = kSmallest(a, l, k);
+//     cout << k << " th smallest number is:" << kLarge << endl;
+//     cout << k << " th largest number is:" << kSmall << endl;
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// vector<int> v1;
+// void printKMax(vector<int> arr, int n, int k)
+// {
+//     std::deque<int> Qi(k);
+//     int i;
+//     for (i = 0; i < k; ++i)
+//     {
+//         while ((!Qi.empty()) && arr[i] >= arr[Qi.back()])
+//             Qi.pop_back();
+//         Qi.push_back(i);
+//     }
+//     for (; i < n; ++i)
+//     {
+//         v1.push_back(Qi.front());
+//         while ((!Qi.empty()) && Qi.front() <= i - k)
+//             Qi.pop_front();
+//         while ((!Qi.empty()) && arr[i] >= arr[Qi.back()])
+//             Qi.pop_back();
+//         Qi.push_back(i);
+//     }
+//     v1.push_back(Qi.front());
+// }
+// int func(int n, int k, vector<int> wt, vector<int> taste)
+// {
+//     vector<int> v(n, 0);
+//     int ans = INT_MIN;
+//     v[n - 1] = taste[n - 1];
+//     v[n - 2] += taste[n - 2] + v[n - 1];
+//     int j = v1.size() - 1;
+//     for (int i = n - 3; i >= 0; i--)
+//     {
+//         v[i] = taste[i];
+//         int index = v1[j];
+//         j--;
+//         v[i] += v[index];
+//         ans = max(v[i], ans);
+//     }
+//     return ans;
+// }
+// int main()
+// {
+//     int n, k;
+//     cin >> n >> k;
+//     vector<int> wt, taste;
+//     for (int i = 0; i < n; i++)
+//     {
+//         int a;
+//         cin >> a;
+//         wt.push_back(a);
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         int a;
+//         cin >> a;
+//         taste.push_back(a);
+//     }
+//     printKMax(wt, n, k);
+//     cout << func(n, k, wt, taste);
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// // A Dequeue (Double ended queue) based
+// // method for printing maximum element of
+// // all subarrays of size k
+// vector<int> printKMax(int arr[], int n, int k)
+// {
+//     vector<int> ans;
+//     std::deque<int> Qi(k);
+//     int i;
+//     for (i = 1; i < k + 1; ++i)
+//     {
+
+//         while ((!Qi.empty()) && arr[i] >= arr[Qi.back()])
+//             Qi.pop_back();
+//         Qi.push_back(i);
+//     }
+//     for (; i < n; ++i)
+//     {
+//         ans.push_back(Qi.front());
+//         while ((!Qi.empty()) && Qi.front() <= i - k)
+//             Qi.pop_front();
+//         while ((!Qi.empty()) && arr[i] >= arr[Qi.back()])
+//             Qi.pop_back();
+//         Qi.push_back(i);
+//     }
+//     ans.push_back(Qi.front());
+//     return ans;
+// }
+// int main()
+// {
+//     int arr[] = {1, 5, 3, 4, 9};
+//     int ts[] = {1, 2, 5, 3, 1};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     int k = 2, mx = 0, ans = 0;
+//     vector<int> vec = printKMax(arr, n, k);
+//     for (auto i : vec)
+//     {
+//         cout << i << " ";
+//     }
+//     cout << endl;
+//     for (int i = 0; i < n; i++)
+//     {
+//         ans = ts[i];
+//         for (auto j : vec)
+//         {
+//             if (j > i)
+//             {
+//                 cout << ts[j] << " " << j << "\t";
+//                 ans += ts[j];
+//             }
+//         }
+//         cout << endl;
+//         mx = max(ans, mx);
+//     }
+//     cout << mx;
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int solve(int n, int k, vector<int> wt, vector<int> ts)
+// {
+//     vector<int> dp(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         for (int j = i + 1, j = min(n, i + k + 1); j++)
+//         {
+
+//         }
+//     }
+// }
+// int main()
+// {
+//     int n, k;
+//     cin >> n >> k;
+//     vector<int> ts(n, 0), wt(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> wt[i];
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> ts[i];
+//     }
+//     cout < solve(n, k, wt, ts);
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int func(int n, int k, vector<int> wt, vector<int> taste)
+// {
+//     vector<int> v(n, 0);
+//     int ans = INT_MIN;
+//     v[n - 1] = taste[n - 1];
+//     for (int i = n - 2; i >= 0; i--)
+//     {
+//         v[i] = taste[i];
+//         int index = i + 1, mx = wt[i + 1];
+//         for (int j = i + 1; j < min(i + k + 1, n); j++)
+//         {
+//             if (wt[j] > mx)
+//                 index = j, mx = v[j];
+//         }
+//         v[i] += v[index];
+//         ans = max(v[i], ans);
+//     }
+//     // for (int i = 0; i < n; i++)
+//     //     cout << v[i] << " ";
+//     return ans;
+// }
+// int main()
+// {
+//     vector<int> wt, taste;
+//     for (int i = 0; i < 10; i++)
+//     {
+//         int a;
+//         cin >> a;
+//         wt.push_back(a);
+//     }
+//     for (int i = 0; i < 10; i++)
+//     {
+//         int a;
+//         cin >> a;
+//         taste.push_back(a);
+//     }
+//     cout << func(10, 10, wt, taste);
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// #define mod 1000000007
+// using namespace std;
+// int solve()
+// int main()
+// {
+//     int n, k, mx = 0, ans = 0;
+//     cin >> n >> k;
+//     vector<int> ts(n, 0), wt(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> ts[i];
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> wt[i];
+//     }
+//     for(int i = 0; i < n; i++){
+
+//     }
+//     return 0;
+// }
+// void solve(ll n, ll j, vector<ll> a, ll &flag, vector<ll> &dp)
+// {
+//     if (j < 0 || j >= n)
+//     {
+//         return;
+//     }
+//     if (flag)
+//     {
+//         return;
+//     }
+//     // if (dp[j])
+//     // {
+//     //     return;
+//     // }
+//     // dp[j] = 1;
+//     if (a[j] == 0)
+//     {
+//         flag = 1;
+//         return;
+//     }
+//     for (ll i = j; i < n && !flag; i++)
+//     {
+//         solve(n, j - a[i], a, flag, dp);
+//         solve(n, j + a[i], a, flag, dp);
+//     }
+//     return;
+// }
+// int main()
+// {
+//     ll n, flag = 0, k;
+//     cin >> n;
+//     vector<ll> arr(n, 0), dp(n + 1, 0);
+//     for (ll i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     cin >> k;
+//     solve(n, k, arr, flag, dp);
+//     if (flag)
+//     {
+//         cout << "True\n";
+//     }
+//     else
+//     {
+//         cout << "False\n";
+//     }
+//     return 0;
+// }
+// vector<ll> solve(ll n)
+// {
+//     vector<ll> arr(n + 1, 0);
+//     arr[1] = 1;
+//     arr[2] = 1;
+//     arr[3] = 1;
+//     for (ll i = 4; i <= n; i++)
+//     {
+//         for (ll j = 1; j < i; j++)
+//         {
+//             if (i % (j - i) == 0)
+//             {
+//                 arr[i] += arr[j] % mod;
+//             }
+//         }
+//     }
+//     return arr;
+// }
+// int main()
+// {
+//     ll t;
+//     cin >> t;
+//     vector<ll> a = solve(100000);
+//     for (ll i = 0; i < t; i++)
+//     {
+//         ll n;
+//         cin >> n;
+//         cout << a[n] % mod << "\n";
+//     }
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//     int k, flag = 0;
+//     string s, mono, poly;
+//     cin >> k >> s;
+//     map<char, int> mp;
+//     vector<int> val(26, 0);
+//     vector<char> alp(26, 0);
+//     for (int i = 0; i < 26; i++)
+//     {
+//         alp[i] = (char)(97 + i);
+//     }
+//     for (int i = 0; i < s.size(); i++)
+//     {
+//         mp[s[i]]++;
+//     }
+//     for (auto i : mp)
+//     {
+//         if (!(i.second % k))
+//         {
+//             val[i.first - 'a'] = i.second / k;
+//         }
+//         else
+//         {
+//             flag = 1;
+//             poly = "-1";
+//         }
+//     }
+//     for (int i = 0; i < 26 && !flag; i++)
+//     {
+//         if (val[i])
+//         {
+//             for (int j = 0; j < val[i]; j++)
+//             {
+//                 mono += alp[i];
+//             }
+//         }
+//     }
+//     for (int i = 0; i < k && !flag; i++)
+//     {
+//         poly += mono;
+//     }
+//     cout << poly << endl;
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// // Function to return maximum sum
+// int maxPointCount(int arr[], int K, int size)
+// {
+//     // Initialize variables
+//     int curr_points = 0;
+//     int max_points = 0;
+
+//     // Iterate over first K elements of array
+//     // and update the value for curr_points
+//     for (int i = 0; i < K; i++)
+//         curr_points += arr[i];
+
+//     // Update value for max_points
+//     max_points = curr_points;
+
+//     // j points to the end of the array
+//     int j = size - 1;
+
+//     for (int i = K - 1; i >= 0; i--)
+//     {
+
+//         curr_points = curr_points + arr[j] - arr[i];
+//         max_points = max(curr_points,
+//                          max_points);
+//         j--;
+//     }
+//     return max_points;
+// }
+// int main()
+// {
+//     int arr[] = {8, 4, 4, 8, 12, 3, 2, 9};
+//     int n = sizeof(arr) / sizeof(arr[0]);
+//     int K = n / 2, sum = 0;
+//     accumulate(arr, arr + n, sum);
+//     cout << maxPointCount(arr, K, n);
+//     if (sum)
+//         return 0;
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// using namespace std;
+// int isMotu(ll &motu, ll &patlu, ll l, ll r, ll turn, vector<ll> a)
+// {
+//     if (l > r)
+//     {
+//         return 0;
+//     }
+//     if (turn)
+//     {
+//         motu += max(a[l] + isMotu(motu, patlu, l + 1, r, turn ^ 1, a), a[r] + isMotu(motu, patlu, l, r - 1, turn ^ 1, a));
+//     }
+//     return (patlu += max(a[l] + isMotu(motu, patlu, l + 1, r, turn ^ 1, a), a[r] + isMotu(motu, patlu, l, r - 1, turn ^ 1, a)));
+// }
+// int main()
+// {
+//     ll n, motu = 0, patlu = 0;
+//     cin >> n;
+//     vector<ll> A(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> A[i];
+//     }
+//     isMotu(motu, patlu, 0, n - 1, 0, A);
+//     cout << motu;
+//     (motu > patlu) ? cout << "True" : cout << "False";
+//     return 0;
+// }
+// int main()
+// {
+//     ll n;
+//     cin >> n;
+//     vector<ll> ts(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> ts[i];
+//     }
+//     cout << max_element(ts.begin(), ts.end()) - ts.begin() << " ";
+// }
 // void addedge(list<int> adj[], int v, int u)
 // {
 //     adj[v].push_back(u);
@@ -77,58 +765,45 @@ using namespace std;
 //     cout << solve(n, m, arr, x);
 //     return 0;
 // }
-void solve(int N, int K, vector<int> h)
-{
-    stack<pair<int, int>> s;
-    vector<int> arr;
-    for (int i = N - 1; i >= 0; i--)
-    {
-        if (s.empty())
-        {
-            arr[i] = -1;
-        }
-        else if (s.size() > 0 && h[i] < s.top().first)
-        {
-            arr[i] = -1;
-        }
-        else if (s.size() > 0 && s.top().first <= h[i])
-        {
-            pair<int, int> p;
-            while (s.size() > 0 && s.top().first <= h[i])
-            {
-                p = s.top();
-                s.pop();
-            }
-            if (s.empty())
-            {
-                arr[i] = -1;
-            }
-            else
-            {
-                arr[i] = i;
-            }
-        }
-        s.push({h[i], i});
-    }
-    for (auto i : arr)
-    {
-        cout << i << "|\t";
-    }
-    return;
-}
-int main()
-{
-    ll n, val, k;
-    cin >> n >> k;
-    vector<int> arr(n, 0);
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
-    sort(arr.begin(), arr.end());
-    solve(n, k, arr);
-    return 0;
-}
+// void solve(int N, int K, vector<int> h)
+// {
+//     stack<pair<int, int>> s;
+//     vector<int> arr;
+//     for (int i = N - 1; i >= 0; i--)
+//     {
+//         if (s.empty())
+//         {
+//             arr[i] = -1;
+//         }
+//         else if (s.size() > 0 && h[i] < s.top().first)
+//         {
+//             arr[i] = -1;
+//         }
+//         else if (s.size() > 0 && s.top().first <= h[i])
+//         {
+//             pair<int, int> p;
+//             while (s.size() > 0 && s.top().first <= h[i])
+//             {
+//                 p = s.top();
+//                 s.pop();
+//             }
+//             if (s.empty())
+//             {
+//                 arr[i] = -1;
+//             }
+//             else
+//             {
+//                 arr[i] = i;
+//             }
+//         }
+//         s.push({h[i], i});
+//     }
+//     for (auto i : arr)
+//     {
+//         cout << i << "|\t";
+//     }
+//     return;
+// }
 // #include <bits/stdc++.h>
 // #define ll long long
 // using namespace std;
@@ -218,53 +893,6 @@ int main()
 //         b = ceil(k / 2);
 //     }
 //     cout << b << "\n";
-//     return 0;
-// }
-// #include <bits/stdc++.h>
-// using namespace std;
-// int main()
-// {
-//     int k, flag = 0;
-//     string s, mono, poly;
-//     cin >> k >> s;
-//     map<char, int> mp;
-//     vector<int> val(26, 0);
-//     vector<char> alp(26, 0);
-//     for (int i = 0; i < 26; i++)
-//     {
-//         alp[i] = (char)(97 + i);
-//     }
-//     for (int i = 0; i < s.size(); i++)
-//     {
-//         mp[s[i]]++;
-//     }
-//     for (auto i : mp)
-//     {
-//         if (!(i.second % k))
-//         {
-//             val[i.first - 'a'] = i.second / k;
-//         }
-//         else
-//         {
-//             flag = 1;
-//             poly = "-1";
-//         }
-//     }
-//     for (int i = 0; i < 26 && !flag; i++)
-//     {
-//         if (val[i])
-//         {
-//             for (int j = 0; j < val[i]; j++)
-//             {
-//                 mono += alp[i];
-//             }
-//         }
-//     }
-//     for (int i = 0; i < k && !flag; i++)
-//     {
-//         poly += mono;
-//     }
-//     cout << poly << endl;
 //     return 0;
 // }
 // int main()

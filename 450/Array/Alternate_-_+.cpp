@@ -1,16 +1,20 @@
-#include<algorithm>
-#include<iostream>
+#include <algorithm>
+#include <iostream>
 using namespace std;
-int main(){
+int main()
+{
     int n;
-    cin>>n;
+    cin >> n;
     int arr[n];
-    for(int i = 0; i < n; i++){
-        cin>>arr[i];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> arr[i];
     }
     int l = -1, temp;
-    for(int i = 0; i< n; i++){
-        if(arr[i] < 0){
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] < 0)
+        {
             l++;
             temp = arr[i];
             arr[i] = arr[l];
@@ -19,13 +23,15 @@ int main(){
     }
     int r = l + 1;
     l = 1;
-    while(l != r){
+    while (l != r)
+    {
         swap(arr[l], arr[r]);
         l += 2;
         r++;
     }
-    for(int i = 0; i < n; i++){
-        cout<<arr[i]<<" ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
     }
     return 0;
 }

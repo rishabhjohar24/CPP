@@ -1,44 +1,50 @@
 //-------USING TOP DOWN------------
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int knapsack(int val[], int wt[], int n, int w){
-    int t[n+1][w+1];
+int knapsack(int val[], int wt[], int n, int w)
+{
+    int t[n + 1][w + 1];
     memset(t, -1, sizeof(t));
-    for(int i = 0; i < n+1; i++){
-        for(int j = 0; j < w + 1; j++){
-            if(i == 0 || j == 0){
+    for (int i = 0; i < n + 1; i++)
+    {
+        for (int j = 0; j < w + 1; j++)
+        {
+            if (i == 0 || j == 0)
+            {
                 t[i][j] = 0;
             }
-            else if(wt[i-1] <= j){
-                t[i][j] = max((val[i-1] + t[i-1][j-wt[i - 1]]), t[i-1][j]);
+            else if (wt[i - 1] <= j)
+            {
+                t[i][j] = max((val[i - 1] + t[i - 1][j - wt[i - 1]]), t[i - 1][j]);
             }
-            else{
+            else
+            {
                 t[i][j] = t[i - 1][j];
             }
         }
     }
     return t[n][w];
 }
-int main(){
+int main()
+{
     int n, w, max;
-    cin>>n>>w;
+    cin >> n >> w;
     int val[n], wt[n];
-    for(int i = 0; i < n; i++){
-        cin>>val[i];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> val[i];
     }
-    for(int i = 0; i < n; i++){
-        cin>>wt[i];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> wt[i];
     }
     max = knapsack(val, wt, n, w);
-    cout<<max;
+    cout << max;
     return 0;
 }
 
-
-
 //-------USING MEMORISATION----------
-
 
 // #include<bits/stdc++.h>
 // using namespace std;

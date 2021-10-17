@@ -5,22 +5,30 @@
 #define vi vector<int>
 #define mod 1000000007
 using namespace std;
-vector<int>r(int n){
-    vector<int>a;
-    while(--n){
-        a.push_back(n);
+int main()
+{
+    for (int k : {0, 1, 2})
+    {
+        cout << k << " ";
     }
-    return a;
+    return 0;
 }
-int main() {
-    int n;
-    cin>>n;
-    vector<int> k = r(n);
-    for(auto i : k){
-        cout<<i<<" ";
-    }
-   return 0;
-}
+// int main()
+// {
+//     int n, val;
+//     cin >> n;
+//     set<int> k;
+//     for (auto i = 0; i < n; i++)
+//     {
+//         cin >> val;
+//         k.insert(val);
+//     }
+//     for (auto i : k)
+//     {
+//         cout << i << " ";
+//     }
+//     return 0;
+// }
 // #include <bits/stdc++.h>
 // #define ll long long int
 // #define mp make_pair
@@ -34,42 +42,41 @@ int main() {
 //     s[2] = '1';
 //     cout<<s;
 //     return 0;
-    // int t;
-    // cin >> t;
-    // while (t--){
-    //     int n;
-    //     cin >> n;
-    //     int t[n+1][6];
-    //     int a[6];
-    //     for(int i=0;i<6;i++) a[i] = INT_MAX;
-    //     for(int i=1;i<=n;i++) {
-    //         for(int j=1;j<6;j++) {
-    //             cin >> t[i][j];
-    //         }
-    //     }
-    //     int index;
-    //     for(int i=1;i<6;i++) {
-    //         for(int j=1;j<=n;j++) {
-    //             if(a[i] > t[j][i]) a[i] = t[j][i],index = j;
-    //         }
-    //         a[i] = index;
-    //     }
-    //    int res = -1,maxcnt=0;
-    //    for(int i=1;i<6;i++) {
-    //        int cnt=1;
-    //        for(int j=1;j<6;j++) {
-    //            if(a[i] == a[j] && i != j) cnt++;
-    //        }
-    //        if(maxcnt == cnt) {
-    //            res =-1;
-    //            break;
-    //        }
-    //        else if(maxcnt < cnt) maxcnt = cnt,res = i;
-    //    }
+// int t;
+// cin >> t;
+// while (t--){
+//     int n;
+//     cin >> n;
+//     int t[n+1][6];
+//     int a[6];
+//     for(int i=0;i<6;i++) a[i] = INT_MAX;
+//     for(int i=1;i<=n;i++) {
+//         for(int j=1;j<6;j++) {
+//             cin >> t[i][j];
+//         }
+//     }
+//     int index;
+//     for(int i=1;i<6;i++) {
+//         for(int j=1;j<=n;j++) {
+//             if(a[i] > t[j][i]) a[i] = t[j][i],index = j;
+//         }
+//         a[i] = index;
+//     }
+//    int res = -1,maxcnt=0;
+//    for(int i=1;i<6;i++) {
+//        int cnt=1;
+//        for(int j=1;j<6;j++) {
+//            if(a[i] == a[j] && i != j) cnt++;
+//        }
+//        if(maxcnt == cnt) {
+//            res =-1;
+//            break;
+//        }
+//        else if(maxcnt < cnt) maxcnt = cnt,res = i;
+//    }
 
- 
-    //     cout << res << "\n";
-    // }
+//     cout << res << "\n";
+// }
 //     return 0;
 // }
 // #include<bits/stdc++.h>
@@ -163,7 +170,7 @@ int main() {
 // }
 // class Solution {
 //   public:
-//     /*This function returns true if the tree contains 
+//     /*This function returns true if the tree contains
 //     a duplicate subtree of size 2 or more else returns false*/
 //     string check(Node* root, map<string , int>& a){
 //         if(!root){
@@ -213,7 +220,7 @@ int main() {
 //     }
 // }
 // // int solve(int n) {
-    
+
 // //     return s.size();
 // // }
 // int main(){
@@ -229,11 +236,11 @@ int main() {
 // }
 // #include <ctype.h>
 // #include <stdio.h>
-  
+
 // int main()
 // {
 //     char ch = '/';
-  
+
 //     // checking is it alphanumeric or not?
 //     if (isalnum(ch))
 //         printf("\nEntered character is alphanumeric\n");
@@ -270,7 +277,7 @@ int main() {
 // int main(){
 //     int n;
 //     cin>>n;
-   
+
 //     cout<<binary(n);
 //     return 0;
 // }
@@ -367,7 +374,7 @@ int main() {
 //         }
 //         else if(arr[i] == 0 && ccnt % 2 != 0){
 //             continue;
-//         }    
+//         }
 //         else if (arr[i] == 1 && ccnt % 2 != 0)
 //         {
 //             ans++;
@@ -521,7 +528,7 @@ int main() {
 // int main(){
 //     cout<<1125899906842624 % MOD;
 //     return 0;
-// } 
+// }
 // #define ll long long int
 // const ll MOD = 1e9 + 7;
 // ll powerLL(ll x, ll n)
@@ -535,12 +542,12 @@ int main() {
 //     }
 //     return result;
 // }
- 
+
 // int main()
 // {
 //     int sa, sb;
 //     cin>>sa>>sb;
- 
+
 //     cout << powerLL(sa, sb / 2) << endl;
 //     return 0;
 // }
@@ -627,7 +634,7 @@ int main() {
 //         seen.insert(s[i]);
 //     }
 //     for(auto i : seen){
-//         cout<<i<<" "; 
+//         cout<<i<<" ";
 //     }
 //     return 0;
 // }
@@ -678,7 +685,6 @@ int main() {
 //     return 0;
 // }
 
-
 // int main(){
 //     int n, counter;
 //     cin>>n>>counter;
@@ -687,9 +693,9 @@ int main() {
 //         int val;
 //         A.push_back(i + 1);
 //     }
-//     int lflag = 0, li = 0, lj = 0, k = 1; 
+//     int lflag = 0, li = 0, lj = 0, k = 1;
 //     //lfag = local flag, li = local i,
-//     //lj = local j 
+//     //lj = local j
 //     for(int i = 0; i < n; i++){
 //         cout<<A[i]<<" ";
 //     }
@@ -727,7 +733,6 @@ int main() {
 //     }
 //     return 0;
 // }
-
 
 // int main(){
 //     int n;
@@ -772,7 +777,7 @@ int main() {
 //     // int n, p;
 //     // cin>>n;
 //     // for(int i = 6; i > 0; i--){
-        
+
 //     // }
 //     float x;
 //     cin>>x;
@@ -788,7 +793,6 @@ int main() {
 //     // cout<<a<<endl<<b<<endl<<c<<endl<<d<<endl<<e<<endl<<f<<endl<<g;
 //     return 0;
 // }
-
 
 // int main(){
 //     int temp, n;
@@ -858,18 +862,17 @@ int main() {
 //     unordered_set <string>:: iterator it;
 //     for(it = s.begin(); it != s.end(); it++){
 //         t = *it;
-//         cout<<t[1]<<" "; 
+//         cout<<t[1]<<" ";
 //     }
 //     return 0;
 // }
-
 
 // #include<bits/stdc++.h>
 // using namespace std;
 // int main(){
 //     string a, b, s;
 //     cin>>a>>b;
-//     s = a + b; 
+//     s = a + b;
 //     // char c[8];
 //     // for(int i = 0; i < 8; i++){
 //     //     cin>>c[i];
@@ -910,7 +913,6 @@ int main() {
 //     return 0;
 // }
 
-
 // #include<bits/stdc++.h>
 // using namespace std;
 // int main(){
@@ -918,7 +920,7 @@ int main() {
 //      cin>>s;
 //     // s[0] = NULL;
 //     // cin>>time;
-    
+
 //     // cout<<s.length();
 //            string temp = s;
 //             string temp1 = temp.substr(0, 2);
@@ -932,22 +934,16 @@ int main() {
 //             // }
 //             cout<<temp1<<endl<<temp3<<endl;
 //             cout<<temp2;
-        
+
 //     return 0;
 // }
-
-
-
-
-
-
 
 // #include<bits/stdc++.h>
 // using namespace std;
 // int main(){
 //     int temp;
 //     vector <int> v;
-//     vector <int> ::iterator it; 
+//     vector <int> ::iterator it;
 //     for(int i = 0; i < 5; i++){
 //         cin>>temp;
 //         v.push_back(temp);
@@ -971,7 +967,6 @@ int main() {
 // printf("\nNumber is Odd");
 // }
 
-
 // #include<bits/stdc++.h>
 // using namespace std;
 // int main(){
@@ -986,8 +981,6 @@ int main() {
 //     }
 //     return 0;
 // }
-
-
 
 // #include<iostream>
 // using namespace std;
@@ -1017,7 +1010,6 @@ int main() {
 //     return 0;
 // }
 
-
 // int main(){
 //     string a[2];
 //     cin>>a[0]>>a[1];
@@ -1030,8 +1022,6 @@ int main() {
 //     }
 //     return 0;
 // }
-
-
 
 // #include<bits/stdc++.h>
 // using namespace std;
@@ -1047,10 +1037,6 @@ int main() {
 //     }
 //     return 0;
 // }
-
-
-
-
 
 // #include<iostream>
 //  using namespace std;
