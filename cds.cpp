@@ -1,32 +1,1226 @@
 #include <bits/stdc++.h>
 using namespace std;
+int countDecodingDP(char *input1)
+{
+  int n = strlen(input1);
+  int count[n + 1];
+  count[0] = 1;
+  count[1] = 1;
+  if (input1[0] == '0')
+    return 0;
+  for (int i = 2; i <= n; i++)
+  {
+    count[i] = 0;
+    if (input1[i - 1] > '0')
+    {
+      count[i] = count[i - 1];
+    }
+    if (input1[i - 2] == '1' || (input1[i - 2] == '2' && input1[i - 1] < '7'))
+    {
+      count[i] += count[i - 2];
+    }
+  }
+  return count[n];
+}
+
+// Driver program to test above function
 int main()
 {
-    int nk, j = 0;
-    string k, s, e;
-    cin >> k >> s;
-    map<int, char> mp;
-    for (int i = 0; i < 26; i++)
-    {
-        mp[i] = 97 + i;
-        //cout << i << " " << mp[i] << "\n";
-    }
-    vector<int> ka(k.size());
-    nk = k.size();
-    vector<pair<int, int>> sa(s.size());
-    for (int i = 0; i < k.size(); i++)
-    {
-        ka[i] = k[i] - 'a';
-    }
-    for (int i = 0; i < s.size(); i++)
-    {
-        int t = (s[i] - 'a' + (ka[j] % 25)) % 25;
-        (!t) ? cout << s[i] : cout << mp[t];
-        j++;
-        j %= nk;
-    }
-    return 0;
+  char input1[] = "121";
+  int n = strlen(input1);
+  cout << "Count is " << countDecodingDP(input1);
+  return 0;
 }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int computeDays(int input1, int input2, int input3[])
+// {
+//   int n = input1;
+//   int x = input2;
+//   sort(input3, input3 + n);
+//   int days = 0;
+//   for (int i = 0; i < n; i++)
+//   {
+//     while (x < input3[i])
+//       x <<= 1, days++;
+//     if (x <= (input3[i] << 1))
+//       x = input3[i] << 1;
+//     days++;
+//   }
+//   return days;
+// }
+// int main()
+// {
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int z(double sales, double wk)
+// {
+//   double phr = 5, sp;
+//   if (sales < 10000)
+//   {
+//     sp = 150;
+//   }
+//   else if (sales < 50000)
+//   {
+//     sp = 750;
+//   }
+//   else
+//   {
+//     sp = double(2 * (double)(sales / 100));
+//   }
+//   return (phr * wk) + sp;
+// }
+// int main()
+// {
+//   cout << z(60000, 20);
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// // A recursive binary search function. It returns
+// // location of x in given array arr[l..r] is present,
+// // otherwise -1
+// int binarySearch(int arr[], int l, int r, int x)
+// {
+//   if (r >= l)
+//   {
+//     int mid = l + (r - l) / 2;
+
+//     // If the element is present at the middle
+//     // itself
+//     if (arr[mid] == x)
+//       return mid;
+
+//     // If element is smaller than mid, then
+//     // it can only be present in left subarray
+//     if (arr[mid] > x)
+//     {
+//       cout << arr[mid];
+//       return binarySearch(arr, l, mid - 1, x);
+//     }
+
+//     // Else the element can only be present
+//     // in right subarray
+//     cout << arr[mid] << " ";
+//     return binarySearch(arr, mid + 1, r, x);
+//   }
+
+//   // We reach here when element is not
+//   // present in array
+//   return -1;
+// }
+
+// int main(void)
+// {
+//   int arr[] = {20, 30, 38, 47, 48, 49, 51, 67, 73, 75, 78, 84, 89, 92, 98};
+//   int x = 89;
+//   int n = sizeof(arr) / sizeof(arr[0]);
+//   int result = binarySearch(arr, 0, n - 1, x);
+//   // (result == -1)
+//   // ? cout << "Element is not present in array"
+//   // : cout << "Element is present at index " << result;
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// #define V 4
+
+// // implementation of traveling Salesman Problem
+// int travllingSalesmanProblem(int graph[][V], int s)
+// {
+//   // store all vertex apart from source vertex
+//   vector<int> vertex;
+//   for (int i = 0; i < V; i++)
+//     if (i != s)
+//       vertex.push_back(i);
+
+//   // store minimum weight Hamiltonian Cycle.
+//   int min_path = INT_MAX;
+//   do
+//   {
+
+//     // store current Path weight(cost)
+//     int current_pathweight = 0;
+
+//     // compute current path weight
+//     int k = s;
+//     for (int i = 0; i < vertex.size(); i++)
+//     {
+//       current_pathweight += graph[k][vertex[i]];
+//       k = vertex[i];
+//     }
+//     current_pathweight += graph[k][s];
+
+//     // update minimum
+//     min_path = min(min_path, current_pathweight);
+
+//   } while (
+//       next_permutation(vertex.begin(), vertex.end()));
+
+//   return min_path;
+// }
+
+// // Driver Code
+// int main()
+// {
+//   // matrix representation of graph
+//   int graph[][V] = {{0, 5, 10, 7},
+//                     {6, 0, 11, 5},
+//                     {8, 5, 0, 6},
+//                     {9, 4, 11, 0}};
+//   int s = 0;
+//   cout << travllingSalesmanProblem(graph, s) << endl;
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// long dist(pair<long, long> p1, pair<long, long> p2)
+// {
+//   long x0 = p1.first - p2.first;
+//   long y0 = p1.second - p2.second;
+//   return x0 * x0 + y0 * y0;
+// }
+// double maxTime(int input1, int input2, int **input3)
+// {
+//   double Max = 0;
+//   for (int i = 0; i < input2; i++)
+//   {
+//     pair<int, int> x = {input3[i][0], input3[i][1]};
+//     for (int j = i + 1; j < input2; j++)
+//     {
+//       pair<int, int> y = {input3[j][0], input3[j][1]};
+//       Max = max(Max, (double)dist(x, y));
+//     }
+//   }
+//   return sqrt(Max) / input1;
+// }
+// int main()
+// {
+//   int n, sp;
+//   cin >> n >> sp;
+//   int arr[n][2];
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i][0] >> arr[i][1];
+//   }
+//   cout << maxTime(sp, n, arr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// struct Node
+// {
+//   int data;
+//   Node *left;
+//   Node *right;
+//   Node(int val)
+//   {
+//     left = NULL;
+//     right = NULL;
+//     data = val;
+//   }
+// };
+// int main()
+// {
+//   vector<int> arr{1, 2, 3};
+//   int brr[] = {1, 2, 3, 4, 5};
+//   solve(arr, *brr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// void Solve(vector<vector<int>> arr)
+// {
+//   int n = arr.size();
+//   unordered_map<int, int> ans;
+//   for (int i = 0; i < arr[0].size(); i++)
+//   {
+//     ans.insert({arr[0][i], 1});
+//   }
+//   for (int i = 1; i < n; i++)
+//   {
+//     unordered_map<int, int> local;
+//     for (int j = 0; j < arr[i].size(); j++)
+//     {
+//       if (ans.find(arr[i][j]) != ans.end())
+//       {
+//         local.insert({arr[i][j], 1});
+//       }
+//     }
+//     ans = local;
+//   }
+//   for (auto i : ans)
+//   {
+//     cout << i.first << " ";
+//   }
+// }
+// int main()
+// {
+//   int n, m;
+//   cin >> n >> m;
+//   vector<vector<int>> arr(n, vector<int>(m, 0));
+//   for (int i = 0; i < n; i++)
+//   {
+//     for (int j = 0; j < m; j++)
+//     {
+//       cin >> arr[i][j];
+//     }
+//   }
+//   Solve(arr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int DFS(int node, vector<int> adj[])
+// {
+//   int mx = INT_MIN, timer = 1;
+//   for (auto i : adj[node])
+//   {
+//   }
+//   return mx;
+// }
+// int main()
+// {
+//   int n, m, flag = 0, timer = 1, mx = INT_MIN;
+//   cin >> n >> m;
+//   vector<int> adj[n];
+//   for (int i = 0; i < n - 1; i++)
+//   {
+//     int a, b;
+//     cin >> a >> b;
+//     adj[a].push_back(b);
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int maxLength(string s)
+// {
+//   if (s.length() <= 1)
+//     return 0;
+//   int curMax = 0;
+//   vector<int> longest(s.size(), 0);
+//   for (int i = 1; i < s.length(); i++)
+//   {
+//     if (s[i] == ')' && i - longest[i - 1] - 1 >= 0 && s[i - longest[i - 1] - 1] == '(')
+//     {
+//       longest[i] = longest[i - 1] + 2 + ((i - longest[i - 1] - 2 >= 0) ? longest[i - longest[i - 1] - 2] : 0);
+//       curMax = max(longest[i], curMax);
+//     }
+//   }
+//   return curMax;
+// }
+// int main()
+// {
+//   int t;
+//   cin >> t;
+//   while (t--)
+//   {
+//     string S;
+//     cin >> S;
+//     maxLength(S);
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int longestSubstring(string s, int n)
+// {
+//   map<int, int> index;
+//   int answer = 0;
+//   int mask = 0;
+//   index[mask] = -1;
+//   for (int i = 0; i < n; i++)
+//   {
+//     int temp = (int)s[i] - 97;
+//     mask ^= (1 << temp);
+//     if (index[mask])
+//     {
+//       answer = max(answer, i - index[mask]);
+//     }
+//     else
+//     {
+//       index[mask] = i;
+//     }
+//     for (int j = 0; j < 26; j++)
+//     {
+//       int mask2 = mask ^ (1 << j);
+//       if (index[mask2])
+//       {
+//         answer = max(answer, i - index[mask2]);
+//       }
+//     }
+//   }
+//   return answer;
+// }
+// int main()
+// {
+//   string s;
+//   cin >> s;
+//   int n = s.size();
+//   cout << longestSubstring(s, n) << "\n";
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   ios::sync_with_stdio(0);
+//   cin.tie(0);
+//   using ll = long long;
+//   int n, m, q;
+//   cin >> n;
+//   vector<vector<ll>> arr(n + 1, vector<ll>(n + 1, INT64_MAX));
+//   for (int i = 0; i < n; i++)
+//   {
+//     int a, b, c;
+//     cin >> a >> b >> c;
+//     arr[i][a] = c;
+//     arr[b][a] = c;
+//   }
+//   for (int k = 1; k <= n; k++)
+//   {
+//     for (int i = 1; i <= n; i++)
+//     {
+//       for (int j = i + 1; j <= n; j++)
+//       {
+//         if ((arr[i][j] > arr[i][k] + arr[k][j]))
+//         {
+//           arr[i][j] = arr[i][k] + arr[k][j];
+//         }
+//       }
+//     }
+//   }
+//   while (q--)
+//   {
+//     int a, b;
+//     cin >> a >> b;
+//     if (a == b)
+//     {
+//       arr[a][b] = 0;
+//     }
+//     if (arr[a][b] == INT64_MAX)
+//     {
+//       arr[a][b] = -1;
+//     }
+//     cout << arr[a][b] << "\n";
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int divideArray(int arr[], int n, int k, int i)
+// {
+//   vector<vector<int>> dp(n + 1, vector<int>(k + 1, 0));
+//   for (int i = n - 1; i >= 0; i--)
+//   {
+//     for (int j = 0; j <= k; j++)
+//     {
+//     }
+//   }
+// }
+
+// Driver code
+// int main()
+// {
+//   int arr[] = {2, 9, 5, 4, 8, 3, 6};
+//   int n = sizeof(arr) / sizeof(int);
+//   int k = 2;
+
+//   cout << divideArray(arr, n, k, 0) << "\n";
+
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int first(int arr[], int x, int n)
+// {
+//   int low = 0, high = n - 1, res = -1;
+//   while (low <= high)
+//   {
+//     int mid = (low + high) / 2;
+//     if (arr[mid] > x)
+//       high = mid - 1;
+//     else if (arr[mid] < x)
+//       low = mid + 1;
+//     else
+//     {
+//       res = mid;
+//       high = mid - 1;
+//     }
+//   }
+//   return res;
+// }
+// void fun(vector<int> arr)
+// {
+//   int n = arr.size();
+//   map<int, int> mp;
+//   for (int i = 0; i < n; i++)
+//   {
+//     mp[arr[i]]++;
+//   }
+// }
+// int main()
+// {
+//   int n;
+//   vector<int> arr(n);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   fun(arr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define f first
+// #define s second
+// using namespace std;
+// int main(){
+//   int n, k;
+//   set<int> visit;
+//   queue<pair<int, int>> q;
+//   cin >> n >> k;
+//   q.push({n, 0});
+//   while (!q.empty()){
+//     int a = q.front().f, b = q.front().s, flag = 0;
+//     q.pop();
+//     visit.insert(a);
+//     if(a == k){
+//        cout<<b<<endl;
+//        break;
+//     }
+//     if (a + a == k || a - a == k || a / a == k || a * a == k){
+//       cout << b + 1 << endl;
+//       break;
+//     }
+//     if (visit.find(a + a) == visit.end()){
+//       q.push({a + a, b + 1});
+//     }
+//     else{
+//       flag += 1;
+//     }
+//     if (visit.find(a - a) == visit.end()){
+//       q.push({a - a, b + 1});
+//     }
+//     else{
+//       flag += 1;
+//     }
+//     if (visit.find(a * a) == visit.end()){
+//       q.push({a * a, b + 1});
+//     }
+//     else{
+//       flag += 1;
+//     }
+//     if (visit.find(a * a) == visit.end()){
+//       q.push({a * a, b + 1});
+//     }
+//     else{
+//       flag += 1;
+//     }
+//     if (flag == 4){
+//       cout << -1 << endl;
+//       break;
+//     }
+//   }
+//   return 0;
+// }
+// int main()
+// {
+//   int n, x, pos = 0, neg;
+//   cin >> n;
+//   map<int, int> m;
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> x;
+//     m[x]++;
+//   }
+//   for (auto i : m)
+//   {
+//     if (i.second == 1)
+//     {
+//       pos += abs(i.first);
+//     }
+//   }
+//   cout << pos;
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   int x, n, k; //prev;
+//   cin >> n >> k;
+//   map<int, int> mp;
+//   vector<int> par(n + 1, -1), ans(n + 1, -1);
+//   for (int i = 1; i <= n; i++)
+//   {
+//     cin >> x;
+//     par[i] = x;
+//   }
+//   for (int i = 0; i < k; i++)
+//   {
+//     cin >> x;
+//     int prev;
+//     while (par[x] != -1)
+//     {
+//       prev = x;
+//       x = par[prev];
+//     }
+//     par[prev] = -1;
+//     ans[prev] = 0;
+//   }
+//   for (int i = 1; i <= n; i++)
+//   {
+//     if (ans[i] == -1)
+//     {
+//       cout << i << " ";
+//     }
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int maxEnergy(vector<vector<int>> mat)
+// {
+//   vector<vector<int>> dp(5, vector<int>(5, 0));
+//   for (int i = 0; i < 4; i++)
+//   {
+//     dp[3][i] = mat[3][i];
+//   }
+//   for (int i = 2; i >= 0; i--)
+//   {
+//     for (int j = 0; j < 4; j++)
+//     {
+//       int max = INT_MAX;
+//       if (((j - 1) >= 0) && (max > dp[i + 1][j - 1]))
+//         max = dp[i + 1][j - 1];
+//       if (((j + 1) < 4) && (max > dp[i + 1][j + 1]))
+//         max = dp[i + 1][j + 1];
+//       if (j < 4 && max > dp[i + 1][j])
+//         max = dp[i + 1][j];
+//       dp[i][j] = mat[i][j] + max;
+//     }
+//   }
+//   int mn = INT_MAX;
+//   for (int i = 0; i < 4; i++)
+//   {
+//     mn = min(mn, dp[0][i]);
+//   }
+//   return 100 - mn;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<vector<int>> arr(n, vector<int>(n, 0));
+//   for (int i = 0; i < n; i++)
+//   {
+//     for (int j = 0; j < n; j++)
+//     {
+//       cin >> arr[i][j];
+//     }
+//   }
+//   cout << maxEnergy(arr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int maxSum(vector<vector<int>> mat)
+// {
+//   int n = 2;
+//   int dp[n][n];
+//   int maxSum = INT_MIN, max;
+//   for (int j = 0; j < n; j++)
+//   {
+//     dp[n - 1][j] = mat[n - 1][j];
+//   }
+//   for (int i = n - 2; i >= 0; i--)
+//   {
+//     for (int j = 0; j < n; j++)
+//     {
+//       max = INT_MAX;
+//       if (((j - 1) >= 0) && (max > dp[i + 1][j - 1]))
+//       {
+//         max = dp[i + 1][j - 1];
+//       }
+//       if (((j + 1) < n) && (max > dp[i + 1][j + 1]))
+//       {
+//         max = dp[i + 1][j + 1];
+//       }
+//       dp[i][j] = mat[i][j] + max;
+//     }
+//   }
+//   for (int j = 0; j < n; j++)
+//     if (maxSum < dp[0][j])
+//     {
+//       maxSum = dp[0][j];
+//     }
+//   return maxSum;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   int t;
+//   cin >> t;
+//   while (t--)
+//   {
+//     int n, shake = 0, cnt = 0;
+//     cin >> n;
+//     priority_queue<pair<int, char>> arr;
+//     for (int i = 0; i < n; i++)
+//     {
+//       int a, b;
+//       cin >> a >> b;
+//       arr.push({a, 'x'});
+//       arr.push({b, 'y'});
+//     }
+//     while (!arr.empty())
+//     {
+//       cnt += (arr.top().second == 'x') ? 1 : -1;
+//       shake = max(shake, cnt);
+//       arr.pop();
+//     }
+//     (shake *= (shake - 1)) /= 2;
+//     cout << shake << endl;
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// bool comps(tuple<string, int, int> a, tuple<string, int, int> b)
+// {
+//   return get<0>(a) < get<0>(b);
+// }
+// bool comp1(tuple<string, int, int> a, tuple<string, int, int> b)
+// {
+//   return get<1>(a) < get<1>(b);
+// }
+// bool comp2(tuple<string, int, int> a, tuple<string, int, int> b)
+// {
+//   return get<2>(a) < get<2>(b);
+// }
+// vector<string> fetchItemsToDisplay(int numOfItems, map<string, pair<int, int>> items, int sortParameter, int sortOrder, int itemsPerPage, int pageNumber)
+// {
+//   int j = 0;
+//   vector<string> ans;
+//   vector<tuple<string, int, int>> arr(numOfItems);
+//   for (auto i : items)
+//   {
+//     arr[j] = {i.first, i.second.first, i.second.second};
+//     j++;
+//   }
+//   if (!sortParameter)
+//   {
+//     sort(arr.begin(), arr.end(), comps);
+//   }
+//   else if (sortParameter == 1)
+//   {
+//     sort(arr.begin(), arr.end(), comp1);
+//   }
+//   else
+//   {
+//     sort(arr.begin(), arr.end(), comp2);
+//   }
+//   if (sortOrder)
+//   {
+//     reverse(arr.begin(), arr.end());
+//   }
+//   j = 0;
+//   for (int i = 0; i < numOfItems; i += itemsPerPage)
+//   {
+//     if (j == pageNumber)
+//     {
+//       for (j = i; j < min(i + itemsPerPage, numOfItems); j++)
+//       {
+//         ans.push_back(get<0>(arr[j]));
+//       }
+//       break;
+//     }
+//     j++;
+//   }
+//   return ans;
+//}
+// vector<string> fetchItemsToDisplay(int numOfItems, map<string, pair<int, int>> items, int sortParameter, int sortOrder, int itemsPerPage, int pageNumber)
+// {
+//   vector<string> str;
+//   int j = 0;
+//   if (sortParameter == 0)
+//   {
+//     vector<pair<string, pair<int, int>>> arr(numOfItems);
+//     for (auto i : items)
+//     {
+//       arr[j] = {i.first, {i.second.first, i.second.second}};
+//       j++;
+//     }
+//     sort(arr.begin(), arr.end());
+//     if (sortOrder)
+//     {
+//       reverse(arr.begin(), arr.end());
+//     }
+//     j = 0;
+//     for (int i = 0; i < numOfItems; i += itemsPerPage)
+//     {
+//       if (j == pageNumber)
+//       {
+//         for (int k = i; k < min(i + itemsPerPage, numOfItems); k++)
+//         {
+//           str.push_back(arr[k].first);
+//         }
+//         break;
+//       }
+//       j++;
+//     }
+//   }
+//   else if (sortParameter == 1)
+//   {
+//     vector<pair<int, pair<string, int>>> arr(numOfItems);
+//     for (auto i : items)
+//     {
+//       arr[j] = {i.second.first, {i.first, i.second.second}};
+//       j++;
+//     }
+//     sort(arr.begin(), arr.end());
+//     if (sortOrder)
+//     {
+//       reverse(arr.begin(), arr.end());
+//     }
+//     j = 0;
+//     for (int i = 0; i < numOfItems; i += itemsPerPage)
+//     {
+//       if (j == pageNumber)
+//       {
+//         for (int k = i; k < min(i + itemsPerPage, numOfItems); k++)
+//         {
+//           str.push_back(arr[k].second.first);
+//         }
+//         break;
+//       }
+//       j++;
+//     }
+//   }
+//   else
+//   {
+//     vector<pair<int, pair<string, int>>> arr(numOfItems);
+//     for (auto i : items)
+//     {
+//       arr[j] = {i.second.second, {i.first, i.second.first}};
+//       j++;
+//     }
+//     sort(arr.begin(), arr.end());
+//     if (sortOrder)
+//     {
+//       reverse(arr.begin(), arr.end());
+//     }
+//     j = 0;
+//     for (int i = 0; i < numOfItems; i += itemsPerPage)
+//     {
+//       if (j == pageNumber)
+//       {
+//         for (int k = i; k < min(i + itemsPerPage, numOfItems); k++)
+//         {
+//           str.push_back(arr[k].second.first);
+//         }
+//         break;
+//       }
+//       j++;
+//     }
+//   }
+//   return str;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   map<string, pair<int, int>> arr;
+//   for (int i = 0; i < n; i++)
+//   {
+//     string a;
+//     int b, c;
+//     cin >> a >> b >> c;
+//     arr.insert({a, {b, c}});
+//   }
+//   int sortParameter;
+//   int sortOrder;
+//   int itemsPerPage;
+//   int pageNumber;
+//   cin >> sortParameter >> sortOrder >> itemsPerPage >> pageNumber;
+//   vector<string> s = fetchItemsToDisplay(n, arr, sortParameter, sortOrder, itemsPerPage, pageNumber);
+//   for (auto i : s)
+//   {
+//     cout << i << " ";
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// using namespace std;
+// bool comp(pair<long, long> a, pair<long, long> b)
+// {
+//   double r1 = (double)a.second / (double)a.first;
+//   double r2 = (double)b.second / (double)b.first;
+//   return r1 > r2;
+// }
+// long getMaxUntil(int num, vector<int> boxes, int unitSize, vector<int> unitPerBox, long truckSize)
+// {
+//   vector<pair<long, long>> arr(num);
+//   for (int i = 0; i < num; i++)
+//   {
+//     arr[i] = {boxes[i], boxes[i] * unitPerBox[i]};
+//   }
+//   sort(arr.begin(), arr.end(), comp);
+//   long currw = 0;
+//   long double finalv = 0.0;
+//   for (int i = 0; i < num; i++)
+//   {
+//     if (currw + arr[i].first <= truckSize)
+//     {
+//       currw += arr[i].first;
+//       finalv += arr[i].second;
+//     }
+//     else
+//     {
+//       long double remain = truckSize - currw;
+//       finalv += arr[i].second * ((long double)remain / (long double)arr[i].first);
+//       break;
+//     }
+//   }
+//   return finalv;
+// }
+// int main()
+// {
+//   ll n, unitsize, trucksize;
+//   cin >> n;
+//   vector<int> boxes(n);
+//   for (ll i = 0; i < n; i++)
+//   {
+//     cin >> boxes[i];
+//   }
+//   cin >> unitsize;
+//   vector<int> unitsperbox(unitsize);
+//   for (int i = 0; i < unitsize; i++)
+//   {
+//     cin >> unitsperbox[i];
+//   }
+//   cin >> trucksize;
+//   cout << getMaxUntil(n, boxes, unitsize, unitsperbox, trucksize);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// using namespace std;
+// int main()
+// {
+//     int n, x;
+//     cin >> n >> x;
+//     vector<int> arr(n);
+//     vector<pair<int, int>> s(n);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//         s[i] = {arr[i], i};
+//     }
+//     x -= 30;
+//     sort(s.begin(), s.end());
+//     int l = 0, r = n - 1, flag = 1;
+//     pair<int, int> p;
+//     p = {0, 1};
+//     if (s[0].first + s[1].first > x)
+//     {
+//         p = {-1, -1};
+//         flag = 0;
+//     }
+//     while (l < r && flag == 1)
+//     {
+//         int t = s[l].first + s[r].first;
+//         int pq = s[p.first].first + s[p.second].first;
+//         if (x < t)
+//         {
+//             if (pq < t)
+//             {
+//                 p = {s[l].second, s[r].second};
+//             }
+//             r--;
+//         }
+//         else if (x > t)
+//         {
+//             if (pq < t)
+//             {
+//                 p = {s[l].second, s[r].second};
+//             }
+//             l++;
+//         }
+//         else
+//         {
+//             p = {s[l].second, s[r].second};
+//             break;
+//         }
+//     }
+//     if (p.first > p.second)
+//     {
+//         swap(p.first, p.second);
+//     }
+//     cout << p.first << " " << p.second;
+//     return 0;
+// }
+
+// #include <bits/stdc++.h>
+// using namespace std;
+// bool comp(pair<int, int> a, pair<int, int> b)
+// {
+//     if (a.first == b.first)
+//     {
+//         return a.second > b.second;
+//     }
+//     return a.first < b.first;
+// }
+// int fun(int p, vector<int> x, vector<int> y)
+// {
+//     int n = x.size(), count = 0, temp = p;
+//     vector<pair<int, int>> arr(n);
+//     vector<bool> seen(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         arr[i] = {x[i], y[i]};
+//     }
+//     sort(arr.begin(), arr.end(), comp);
+//     for (int i = 0; i < n; i++)
+//     {
+//         for (int j = 0; j <= i; j++)
+//         {
+//             if (temp >= arr[j].first && !seen[j])
+//             {
+//                 seen[j] = 1;
+//                 temp += arr[j].second;
+//             }
+//         }
+//     }
+//     for (auto i : seen)
+//     {
+//         count += (i) ? 1 : 0;
+//     }
+//     return count;
+// }
+// int main()
+// {
+//     int n, p;
+//     cin >> n >> p;
+//     vector<int> x(n), y(n);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> x[i];
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> y[i];
+//     }
+//     cout << fun(p, x, y);
+//     return 0;
+// }
+// int main()
+// {
+//     int n;
+//     cin >> n;
+//     vector<char> arr(n, ' '), ans_char;
+//     vector<int> ans_int;
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     int count = 1;
+//     for (int i = 1; i < n; i++)
+//     {
+//         if (arr[i - 1] == arr[i])
+//         {
+//             count++;
+//         }
+//         else
+//         {
+//             if (count > 1)
+//             {
+//                 ans_char.push_back(arr[i - 1]);
+//                 ans_int.push_back(count);
+//             }
+//             else
+//             {
+//                 ans_char.push_back(arr[i - 1]);
+//             }
+//             count = 1;
+//         }
+//     }
+//     if (count > 1)
+//     {
+//         ans_char.push_back(arr[n - 1]);
+//         ans_int.push_back(count);
+//     }
+//     else
+//     {
+//         ans_char.push_back(arr[n - 1]);
+//     }
+//     cout << ans_char.size() + ans_int.size() << endl;
+//     return 0;
+// }
+// int solve(vector<vector<int>> arr, int x, int p)
+// {
+//     int n = arr.size();
+//     int ans = INT_MAX;
+//     if (p == n)
+//     {
+//         return 0;
+//     }
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (i != x)
+//         {
+//             ans = min(ans, arr[p][i] + solve(arr, i, p + 1));
+//         }
+//     }
+//     return ans;
+// }
+// ll solve(vector<ll> arr, ll n, ll val, ll x)
+// {
+//     if (x == n)
+//     {
+//         return 0;
+//     }
+//     ll ans = 0;
+//     for (ll i = x; i < n; i++)
+//     {
+//         if (arr[i] == val && val == 2)
+//         {
+//             ans = 1 + min(solve(arr, n, 1, i + 1), solve(arr, n, 3, i + 1));
+//             break;
+//         }
+//         if (arr[i] == val && val == 1)
+//         {
+//             ans = 1 + min(solve(arr, n, 2, i + 1), solve(arr, n, 3, i + 1));
+//             break;
+//         }
+//         if (arr[i] == val && val == 3)
+//         {
+//             ans = 1 + min(solve(arr, n, 1, i + 1), solve(arr, n, 2, i + 1));
+//             break;
+//         }
+//     }
+//     return ans;
+// }
+// int main()
+// {
+//     ll n;
+//     cin >> n;
+//     vector<ll> arr(n, 0);
+//     for (int i = 0; i < n; i++)
+//     {
+//         cin >> arr[i];
+//     }
+//     cout << solve(arr, n, 2, 0);
+//     return 0;
+// }
+// int main()
+// {
+//     int n, m, k, x, j = 0;
+//     cin >> n >> m >> k >> x;
+//     string arr[m], str, o;
+//     cin >> str;
+//     for (int i = 0; i < m; i++)
+//     {
+//         cin >> o;
+//         sort(o.begin(), o.end());
+//         arr[i] = o;
+//     }
+//     sort(arr, arr + m);
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (str[i] == '#')
+//         {
+//             str[i] = arr[j][0];
+//             arr[j] = arr[j].substr(1, arr[j].length() - 1);
+//             j++;
+//             if (j == m)
+//             {
+//                 sort(arr, arr + m);
+//                 j %= m;
+//             }
+//         }
+//     }
+//     cout << str << endl;
+//     return 0;
+// }
+// int main()
+// {
+//     string s, a, b, sorted;
+//     int n;
+//     cin >> s;
+//     sorted = s;
+//     n = s.size();
+//     sort(sorted.begin(), sorted.end());
+//     for (int i = 0; i < n; i++)
+//     {
+//         a += s[i];
+//         if (a.back() == sorted[0])
+//         {
+//         }
+//     }
+//     return 0;
+// }
+// int main()
+// {
+//     int n, k, lsum = 0, msum = 0, ans = 0;
+//     cin >> n >> k;
+//     vector<int> arr(n);
+//     for (int i = 0; i < n; i++)
+//     {`
+//         cin >> arr[i];
+//         if (i < k)
+//         {
+//             lsum += arr[i];
+//         }
+//     }
+//     ans = 0;
+//     msum = lsum;
+//     for (int i = k; i < n; i++)
+//     {
+//         lsum += arr[i] - arr[i - k];
+//         if (lsum > msum)
+//         {
+//             msum = lsum;
+//             ans = i - k + 1;
+//         }
+//     }
+//     cout << ans + 1 << endl;
+//     return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//     int nk, j = 0;
+//     string k, s, e;
+//     cin >> k >> s;
+//     map<int, char> mp;
+//     for (int i = 0; i < 26; i++)
+//     {
+//         mp[i] = 97 + i;
+//         //cout << i << " " << mp[i] << "\n";
+//     }
+//     vector<int> ka(k.size());
+//     nk = k.size();
+//     vector<pair<int, int>> sa(s.size());
+//     for (int i = 0; i < k.size(); i++)
+//     {
+//         ka[i] = k[i] - 'a';
+//     }
+//     for (int i = 0; i < s.size(); i++)
+//     {
+//         int t = (s[i] - 'a' + (ka[j] % 25)) % 25;
+//         (!t) ? cout << s[i] : cout << mp[t];
+//         j++;
+//         j %= nk;
+//     }
+//     return 0;
+// }
 // int main()
 // {
 //     int m, n, p;
@@ -46,7 +1240,6 @@ int main()
 //     cout << ans << "\n";
 //     return 0;
 // }
-
 // string solve(vector<int> s, vector<int> t)
 // {
 //     int n = s.size(), m = t.size();

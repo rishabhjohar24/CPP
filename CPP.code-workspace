@@ -103,7 +103,9 @@
 			"xstddef": "cpp",
 			"xtr1common": "cpp",
 			"xtree": "cpp",
-			"template": "c"
+			"template": "c",
+			"*.tcc": "cpp",
+			"string_view": "cpp"
 		},
 		"git.ignoreLimitWarning": true,
 		"prettier.printWidth": 100
