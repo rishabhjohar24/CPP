@@ -3,15 +3,17 @@
 using namespace std;
 int main()
 {
+  ofstream out("y.txt");
+  ifstream in("x.txt");
   ll n, m;
-  cin >> n >> m;
+  in >> n >> m;
   priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> q;
   vector<ll> level(n + 1, INT64_MAX);
   vector<pair<ll, ll>> adj[n + 1];
   for (ll i = 0; i < m; i++)
   {
     ll a, b, c;
-    cin >> a >> b >> c;
+    in >> a >> b >> c;
     adj[a].push_back({b, c});
   }
   q.push({1, 0});
@@ -36,7 +38,7 @@ int main()
   }
   for (ll i = 1; i <= n; i++)
   {
-    cout << level[i] << " ";
+    out << level[i] << " ";
   }
   return 0;
 }

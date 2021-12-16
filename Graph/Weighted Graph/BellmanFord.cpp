@@ -61,5 +61,6 @@ int main()
   {
     cin >> arr[i].a >> arr[i].b >> arr[i].w;
   }
+  BellmanFord(arr, m, n);
   return 0;
 }

@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
-bool visit[100001] = {false};
+bool vis[100001] = {false};
 vector<int> parent(100001);
 void DFS(int node, list<int> adj[], int par)
 {
-    visit[node] = true;
+    vis[node] = true;
     parent[node] = par;
     for (auto child : adj[node])
     {
-        if (!visit[child])
+        if (!vis[child])
         {
             DFS(child, adj, node);
         }
@@ -51,7 +51,7 @@ int main()
     }
     for (int i = 1; i <= n; i++)
     {
-        if (!visit[i])
+        if (!vis[i])
         {
             DFS(i, adj, 0);
         }

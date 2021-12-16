@@ -1,48 +1,58 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-struct Node{
+struct Node
+{
     Node *left, *right;
     int data;
-    Node(int val){
+    Node(int val)
+    {
         data = val;
         left = NULL;
         right = NULL;
     }
 };
 
-Node* buildTree(){
+Node *buildTree()
+{
     int val;
-    cin>>val;
-    if(val == -1){
+    cin >> val;
+    if (val == -1)
+    {
         return NULL;
     }
-    Node* root = new Node(val);
+    Node *root = new Node(val);
     root->left = buildTree();
     root->right = buildTree();
     return root;
 }
 
-void inorder(Node* root){
-    if(!root){
+void inorder(Node *root)
+{
+    if (!root)
+    {
         return;
     }
     inorder(root->left);
-    cout<<root->data<<" ";
+    cout << root->data << " ";
     inorder(root->right);
 }
 
-void flatten(Node* root){
-    if(!root || (!root->left && !root->right)){
+void flatten(Node *root)
+{
+    if (!root || (!root->left && !root->right))
+    {
         return;
     }
-    if(root->left){
+    if (root->left)
+    {
         flatten(root->left);
-        Node* temp = root->right;
+        Node *temp = root->right;
         root->right = root->left;
         root->left = NULL;
 
-        Node* t = root->right;
-        while(t->right){
+        Node *t = root->right;
+        while (t->right)
+        {
             t = t->right;
         }
         t->right = temp;
@@ -50,8 +60,9 @@ void flatten(Node* root){
     flatten(root->right);
 }
 
-int main(){
-    Node* root = buildTree();
+int main()
+{
+    Node *root = buildTree();
     flatten(root);
     inorder(root);
     return 0;

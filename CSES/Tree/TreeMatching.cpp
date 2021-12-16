@@ -3,6 +3,9 @@ using namespace std;
 const int sz = 1e6;
 vector<int> adj[sz + 1];
 vector<vector<int>> dp(2, vector<int>(sz + 1, 0));
+int DFS(int node, int c)
+{
+}
 int main()
 {
     int n;
@@ -12,6 +15,6 @@ int main()
         int a, b;
         cin >> a >> b;
         adj[a].push_back(b);
-        adj[b].push_back(a);
     }
+    return 0;
 }

@@ -1,36 +1,301 @@
 #include <bits/stdc++.h>
 using namespace std;
-int countDecodingDP(char *input1)
-{
-  int n = strlen(input1);
-  int count[n + 1];
-  count[0] = 1;
-  count[1] = 1;
-  if (input1[0] == '0')
-    return 0;
-  for (int i = 2; i <= n; i++)
-  {
-    count[i] = 0;
-    if (input1[i - 1] > '0')
-    {
-      count[i] = count[i - 1];
-    }
-    if (input1[i - 2] == '1' || (input1[i - 2] == '2' && input1[i - 1] < '7'))
-    {
-      count[i] += count[i - 2];
-    }
-  }
-  return count[n];
-}
-
-// Driver program to test above function
 int main()
 {
-  char input1[] = "121";
-  int n = strlen(input1);
-  cout << "Count is " << countDecodingDP(input1);
+  int n;
+  cin >> n;
+  // vector<vector<int>> arr(n + 1, vector<int>(log2(n) + 1, -1));
+  // for (int i = 1; i <= n; i++)
+  // {
+  //   cin >> arr[i][0];
+  // }
+  // for (int j = 1; (1 << j) < n; j++)
+  // {
+  //   for (int i = 1; i <= n; i++)
+  //   {
+  //     if (arr[i][j - 1] != -1)
+  //     {
+  //       arr[i][j] = arr[arr[i][j - 1]][j - 1];
+  //     }
+  //   }
+  // }
+  // for (int i = 0; i <= n; i++)
+  // {
+  //   for (int j = 0; j < log2(n); j++)
+  //   {
+  //     cout << arr[i][j] << " ";
+  //   }
+  //   cout << endl;
+  // }
+  cout << (2 < log2(n));
   return 0;
 }
+// #include <bits/stdc++.h>
+// using namespace std;
+// struct Node
+// {
+//   Node *next;
+//   int data;
+//   Node(int val) : next(nullptr), data(val){};
+// };
+// Node *build(int val)
+// {
+//   Node *node = new Node(val);
+//   return
+// }
+// int main()
+// {
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   int n, x, ans = 0, p = 0;
+//   cin >> n;
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> x;
+//     ans ^= x;
+//     p ^= i + 1;
+//   }
+//   cout << (ans ^ p);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int entryTime(string s, string keyboard)
+// {
+//   map<char, pair<int, int>> mp;
+//   int i = 0, j = 0, n = s.size(), ans = 0;
+//   for (int k = 0; k < 10; k++)
+//   {
+//     mp[keyboard[k]] = {i, j};
+//     j++;
+//     if (j == 3)
+//     {
+//       i++, j = 0;
+//     }
+//   }
+//   pair<int, int> p = mp[s[0]];
+//   for (i = 1; i < n; i++)
+//   {
+//     ans += max(abs(p.first - mp[s[i]].first), abs(p.second - mp[s[i]].second));
+//     p = mp[s[i]];
+//   }
+//   return ans;
+// }
+// int main()
+// {
+//   string key, str;
+//   cin >> key >> str;
+//   cout << entryTime(str, key);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// #define OUT 0
+// #define IN 1
+// unsigned countWords(char *str)
+// {
+//   int state = OUT;
+//   unsigned wc = 0;
+//   while (*str)
+//   {
+//     if (*str == ' ' || *str == '\n' || *str == '\t')
+//       state = OUT;
+//     else if (state == OUT)
+//     {
+//       state = IN;
+//       ++wc;
+//     }
+//     ++str;
+//   }
+//   return wc;
+// }
+
+// int main(void)
+// {
+//   char str[] = "One two     three\n four\tfive ";
+//   cout << "No of words : " << countWords(str);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+
+// #define OUT 0
+// #define IN 1
+// int maxPresentations(vector<int> s, vector<int> f)
+// {
+//   int n = f.size();
+//   pair<int, int> a[n + 1];
+//   int i;
+//   for (i = 0; i < n; i++)
+//   {
+//     a[i].first = f[i];
+//     a[i].second = i;
+//   }
+//   sort(a, a + n);
+//   int time_limit = a[0].first;
+//   vector<int> m;
+//   m.push_back(a[0].second + 1);
+//   for (i = 1; i < n; i++)
+//   {
+//     if (s[a[i].second] >= time_limit)
+//     {
+//       m.push_back(a[i].second + 1);
+//       time_limit = a[i].first;
+//     }
+//   }
+//   return m.size();
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<int> s(n), f(n);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> s[i];
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> f[i];
+//   }
+//   cout << maxMeetings(s, f, n);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int getMinDeletions(string s)
+// {
+//   const int MAX_CHAR = 26;
+//   int n = s.length();
+//   if (n > MAX_CHAR)
+//     return 0;
+//   int dist_count = 0;
+//   int count[MAX_CHAR] = {0};
+//   for (int i = 0; i < n; i++)
+//   {
+//     if (count[s[i] - 'a'] == 0)
+//       dist_count++;
+//     count[(s[i] - 'a')]++;
+//   }
+//   return (n - dist_count);
+// }
+// int main()
+// {
+//   string str;
+//   cin >> str;
+//   cout << getMinDeletions(str);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int reverseNum(int x)
+// {
+//   string s = to_string(x);
+//   reverse(s.begin(), s.end());
+//   stringstream ss(s);
+//   int rev = 0;
+//   ss >> rev;
+//   return rev;
+// }
+// bool isMysteryNumber(int n)
+// {
+//   for (int i = 1; i <= n / 2; i++)
+//   {
+//     int j = reverseNum(i);
+//     if (i + j == n)
+//     {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+// // Read only region ke upar ye upar wala maal likhna
+// int is_special(string input1[], int input2)
+// {
+//   int cnt = 0;
+//   for (int i = 0; i < input2; i++)
+//   {
+//     if (isMysteryNumber(stoi(input1[i])))
+//     {
+//       cnt++;
+//     }
+//   }
+//   return cnt;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   string arr[n];
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   cout << is_special(arr, n);
+//   return 0;
+// }
+// int find(int input1[], int input2)
+// {
+//   for (int i = 1; i < input2; i++)
+//   {
+//     if (__gcd(input1[i - 1], input1[i]) == 1)
+//     {
+//       if (input1[i - 1] > input1[i])
+//       {
+//         return i - 1;
+//       }
+//     }
+//   }
+//   return 0;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   int arr[n];
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   cout << find(arr, n);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int countDecodingDP(char *input1)
+// {
+//   int n = strlen(input1);
+//   int count[n + 1];
+//   count[0] = 1;
+//   count[1] = 1;
+//   if (input1[0] == '0')
+//     return 0;
+//   for (int i = 2; i <= n; i++)
+//   {
+//     count[i] = 0;
+//     if (input1[i - 1] > '0')
+//     {
+//       count[i] = count[i - 1];
+//     }
+//     if (input1[i - 2] == '1' || (input1[i - 2] == '2' && input1[i - 1] < '7'))
+//     {
+//       count[i] += count[i - 2];
+//     }
+//   }
+//   return count[n];
+// }
+// // Driver program to test above function
+// int main()
+// {
+//   char input1[] = "121";
+//   int n = strlen(input1);
+//   cout << "Count is " << countDecodingDP(input1);
+//   return 0;
+// }
 // #include <bits/stdc++.h>
 // using namespace std;
 // int computeDays(int input1, int input2, int input3[])
@@ -1815,16 +2080,12 @@ int main()
 //     // and update the value for curr_points
 //     for (int i = 0; i < K; i++)
 //         curr_points += arr[i];
-
 //     // Update value for max_points
 //     max_points = curr_points;
-
 //     // j points to the end of the array
 //     int j = size - 1;
-
 //     for (int i = K - 1; i >= 0; i--)
 //     {
-
 //         curr_points = curr_points + arr[j] - arr[i];
 //         max_points = max(curr_points,
 //                          max_points);
@@ -2385,7 +2646,6 @@ int main()
 // sort(j.begin(), j.end());
 // int i = n - 1, k = n - 1;
 // hile
-
 // cout<<sum;
 //     int cnt[input1 + 1];
 //     int sum[input1 + 1];
@@ -2398,7 +2658,6 @@ int main()
 //         sum[i] = (sum[i-1] + input4[i - 1]) % input3;
 //         cnt[ sum[i] ] ++;
 //     }
-
 //     long long res = 0;
 //     for(int r = 0; r < k; r ++)
 //         res += (cnt[r]*(cnt[r]-1)/2);
