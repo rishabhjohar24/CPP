@@ -33,33 +33,29 @@ void build(ll l, ll r, ll v, vector<ll> &arr)
   }
   return;
 }
-void update(ll l, ll r, ll v, ll pos, ll val)
+void update(ll l, ll r, ll v, ll q1, ll q2, ll val)
 {
-  if (l == r)
+  if (q1 > q2)
+  {
+    return;
+  }
+  if (l >= q1 && q2 <= r)
   {
     tree[v] = {val, val};
   }
   else
   {
     ll mid = _mid(l, r), a = v << 1, b = v << 1 | 1;
-    if (pos <= mid)
-    {
-      update(l, mid, a, pos, val);
-    }
-    else
-    {
-      update(mid + 1, r, b, pos, val);
-    }
+    update(l, mid, a, q1, min(mid, q2), val);
+    update(mid + 1, r, b, max(q1, mid + 1), q2, val);
     merge(v);
   }
-  return;
 }
 Node query(ll l, ll r, ll v, ll q1, ll q2)
 {
   if (q1 > q2)
   {
-    Node x = {0, 0};
-    return x;
+    return {0, 0};
   }
   if (l >= q1 && r <= q2)
   {
@@ -77,23 +73,23 @@ int main()
   ios::sync_with_stdio(false);
   cin.tie(0);
   ll n, q, x, q1, q2;
-  in >> n >> q;
+  cin >> n >> q;
   vector<ll> arr(n);
   for (ll i = 0; i < n; i++)
   {
-    in >> arr[i];
+    cin >> arr[i];
   }
   build(0, n - 1, 1, arr);
   while (q--)
   {
-    in >> x >> q1 >> q2;
+    cin >> x >> q1 >> q2;
     if (x == 1)
     {
-      update(0, n - 1, 1, q1 - 1, q2);
+      update(0, n - 1, 1, q1 - 1, n - 1, q2);
     }
     else
     {
-      out << query(0, n - 1, 1, q1 - 1, q2 - 1).pre << "\n";
+      cout << query(0, n - 1, 1, q1 - 1, q2 - 1).pre << "\n";
     }
   }
   return 0;

@@ -7,7 +7,7 @@ vector<ll> adj[sz], level(sz), par(sz), in(sz);
 vector<bool> visited(sz, false);
 vector<vector<ll>> pre(sz, vector<ll>(mx_sz, -1));
 
-//helper functions
+// helper functions
 
 void DFS(ll);
 void preProcess(ll);
@@ -43,6 +43,14 @@ int main()
         }
     }
     cout << distance(p, q, n, root) << endl;
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= log2(n); j++)
+        {
+            cout << pre[i][j] << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
 
@@ -65,7 +73,7 @@ void preProcess(ll n)
     {
         pre[i][0] = par[i];
     }
-    for (ll i = 1; (1 << i) < n; i++)
+    for (ll i = 1; (1 << i) <= n; i++)
     {
         var = i;
         for (ll j = 1; j <= n; j++)
@@ -87,17 +95,18 @@ ll LCA(ll a, ll b, ll n)
     while (diff)
     {
         ll jump = log2(diff);
-        a = pre[a][jump];
+        b = pre[b][jump];
         diff -= (1 << jump);
     }
     if (a == b)
     {
         return b;
     }
-    for (ll i = var; i >= 0; i--)
+    for (ll i = log2(n); i >= 0; i--)
     {
         if (pre[a][i] != -1 && pre[a][i] != pre[b][i])
         {
+            cout << "h";
             a = pre[a][i];
             b = pre[b][i];
         }

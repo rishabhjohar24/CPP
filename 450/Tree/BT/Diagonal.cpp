@@ -1,44 +1,53 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-struct Node{
+struct Node
+{
     Node *left, *right;
     int data;
-    Node(int val){
+    Node(int val)
+    {
         data = val;
         left = right = NULL;
     }
 };
 
-Node* buildTree(){
+Node *buildTree()
+{
     int val;
-    cin>>val;
-    if(val == -1){
+    cin >> val;
+    if (val == -1)
+    {
         return NULL;
     }
-    Node* root = new Node(val);
+    Node *root = new Node(val);
     root->left = buildTree();
     root->right = buildTree();
     return root;
 }
 
-void Diagonal(Node* root, map<int, vector<int>>& a, int d){
-    if(!root){
+void Diagonal(Node *root, map<int, vector<int>> &a, int d)
+{
+    if (!root)
+    {
         return;
-    } 
+    }
     a[d].push_back(root->data);
-    Diagonal(root->right, a, d);
     Diagonal(root->left, a, d + 1);
+    Diagonal(root->right, a, d);
 }
-int main(){
-    Node* root = buildTree();
+int main()
+{
+    Node *root = buildTree();
     map<int, vector<int>> a;
     Diagonal(root, a, 0);
-    for(auto i : a){
+    for (auto i : a)
+    {
         vector<int> k = i.second;
-        for(auto j : k){
-            cout<<j<<" ";
+        for (auto j : k)
+        {
+            cout << j << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     return 0;
 }

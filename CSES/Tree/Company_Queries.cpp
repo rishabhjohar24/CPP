@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int lift[200001][30];
+int lift[200001][21];
 int main()
 {
   ios::sync_with_stdio(0);
@@ -9,19 +9,15 @@ int main()
   // ofstream out("y.txt");
   int n, q, a, b;
   cin >> n >> q;
-  memset(lift, -1, sizeof(lift));
   for (int i = 2; i <= n; i++)
   {
     cin >> lift[i][0];
   }
   for (int j = 1; (1 << j) <= n; j++)
   {
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i <= n; i++)
     {
-      if (lift[i][j - 1] != -1)
-      {
-        lift[i][j] = lift[lift[i][j - 1]][j - 1];
-      }
+      lift[i][j] = lift[lift[i][j - 1]][j - 1];
     }
   }
   while (q--)
@@ -34,7 +30,7 @@ int main()
         a = lift[a][i];
       }
     }
-    cout << a << "\n";
+    a ? cout << a << "\n" : cout << "-1\n";
   }
   return 0;
 }

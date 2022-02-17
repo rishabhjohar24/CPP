@@ -40,7 +40,6 @@ void DFS(int node, int parent)
     if (parent == -1 && children > 1)
     {
         isCutpoint[node] = true;
-        ;
     }
 }
 int main()
@@ -52,7 +51,7 @@ int main()
         cin >> a >> b;
         addedge(a, b);
     }
-    DFS(0, -1);
+    DFS(1, -1);
     for (int i = 1; i <= n; i++)
     {
         if (isCutpoint[i])

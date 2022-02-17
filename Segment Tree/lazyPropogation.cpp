@@ -45,7 +45,7 @@ ll query(ll l, ll r, ll v, ll pos)
   ll mid = (l + r) >> 1;
   if (pos <= mid)
   {
-    return tree[v] + query(l, mid + 1, v << 1, pos);
+    return tree[v] + query(l, mid, v << 1, pos);
   }
   return tree[v] + query(mid + 1, r, v << 1 | 1, pos);
 }

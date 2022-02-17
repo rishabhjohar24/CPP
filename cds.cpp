@@ -1,35 +1,1087 @@
-#include <bits/stdc++.h>
-using namespace std;
-int main()
-{
-  int n;
-  cin >> n;
-  // vector<vector<int>> arr(n + 1, vector<int>(log2(n) + 1, -1));
-  // for (int i = 1; i <= n; i++)
-  // {
-  //   cin >> arr[i][0];
-  // }
-  // for (int j = 1; (1 << j) < n; j++)
-  // {
-  //   for (int i = 1; i <= n; i++)
-  //   {
-  //     if (arr[i][j - 1] != -1)
-  //     {
-  //       arr[i][j] = arr[arr[i][j - 1]][j - 1];
-  //     }
-  //   }
-  // }
-  // for (int i = 0; i <= n; i++)
-  // {
-  //   for (int j = 0; j < log2(n); j++)
-  //   {
-  //     cout << arr[i][j] << " ";
-  //   }
-  //   cout << endl;
-  // }
-  cout << (2 < log2(n));
-  return 0;
-}
+// #include <bits/stdc++.h>
+// using namespace std;
+// int timer = 0;
+// void DFS(int node, int parent, vector<vector<int>> &adj, vector<int> &vis, vector<int> &low, vector<int> &tin, set<int> &cutPoint)
+// {
+//   vis[node] = 1;
+//   tin[node] = low[node] = timer++;
+//   int children = 0;
+//   for (auto child : adj[node])
+//   {
+//     if (child == parent)
+//     {
+//       continue;
+//     }
+//     if (vis[child])
+//     {
+//       low[node] = min(low[node], tin[child]);
+//     }
+//     else
+//     {
+//       DFS(child, node, adj, vis, low, tin, cutPoint);
+//       children++;
+//       if (low[child] >= tin[node] && parent != -1)
+//       {
+//         cutPoint.insert(node);
+//       }
+//       low[node] = min(low[node], low[child]);
+//     }
+//   }
+//   if (parent == -1 & children > 1)
+//   {
+//     cutPoint.insert(node);
+//   }
+//   return;
+// }
+// int main()
+// {
+//   ios::sync_with_stdio(false);
+//   cin.tie(0);
+//   int n, m, a, b;
+//   while (true)
+//   {
+//     timer = 0;
+//     cin >> n >> m;
+//     if (!n && !m)
+//     {
+//       break;
+//     }
+//     vector<int> tin(n + 1, -1), low(n + 1, 0), vis(n + 1, 0);
+//     vector<vector<int>> adj(n + 1);
+//     set<int> cutPoint;
+//     for (int i = 0; i < m; i++)
+//     {
+//       cin >> a >> b;
+//       adj[a].push_back(b);
+//       adj[b].push_back(a);
+//     }
+//     DFS(1, -1, adj, vis, low, tin, cutPoint);
+//     cutPoint.empty() ? cout << 0 : cout << cutPoint.size();
+//     cout << "\n";
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define vv(x) vector<vector<x>>
+// #define v(x) vector<x>
+// using namespace std;
+// int timer = 0;
+// int DFS(int node, int parent, vv(int) & adj, v(int) & tin, v(int) & low, v(int) & visited)
+// {
+//   visited[node] = 1;
+//   tin[node] = low[node] = timer++;
+//   for (auto child : adj[node])
+//   {
+//     if (child == parent)
+//     {
+//       continue;
+//     }
+//     if (visited[child])
+//     {
+//       low[node] = min(low[node], tin[child]);
+//     }
+//     else
+//     {
+//       DFS(child, node, adj, tin, low, visited);
+//       low[node] = min(low[node], low[child]);
+//       if (low[child] > tin[node])
+//       {
+//         cout << "There's a bridge at : " << child << " - " << node << "\n";
+//       }
+//     }
+//   }
+// }
+// int main()
+// {
+//   int n, m, a, b;
+//   cin >> n >> m;
+//   vv(int) arr(n + 1);
+//   v(int) tin(n + 1, -1), low(n + 1, -1), visited(n + 1, 0);
+//   for (int i = 0; i < m; i++)
+//   {
+//     cin >> a >> b;
+//     arr[a].push_back(b);
+//   }
+//   return 0;
+// }
+// struct Connection
+// {
+//   string firstTown;
+//   string secondTown;
+//   int cost = 0;
+// };
+// string find(string str, map<string, string> &par)
+// {
+//   if (par[str] == "")
+//   {
+//     return str;
+//   }
+//   return par[str] = find(par[str], par);
+// }
+// bool comp(Connection x, Connection y)
+// {
+//   return x.cost < y.cost;
+// }
+// vector<Connection> minimumCostConnection(int num, vector<Connection> &connection)
+// {
+//   map<string, string> par;
+//   vector<Connection> ans;
+//   sort(connection.begin(), connection.end(), comp);
+//   for (int i = 0; i < connection.size(); i++)
+//   {
+//     string a = find(connection[i].firstTown, par);
+//     string b = find(connection[i].secondTown, par);
+//     if (a != b)
+//     {
+//       ans.push_back({connection[i].firstTown, connection[i].secondTown, connection[i].cost});
+//       par[a] = b;
+//     }
+//   }
+//   return ans;
+// }
+// int main()
+// {
+//   int n, m, sum = 0;
+//   cin >> m;
+//   vector<Connection> arr(m);
+//   for (int i = 0; i < m; i++)
+//   {
+//     cin >> arr[i].firstTown >> arr[i].secondTown >> arr[i].cost;
+//   }
+//   vector<Connection> ans = minimumCostConnection(n, arr);
+//   for (int i = 0; i < ans.size(); i++)
+//   {
+//     cout << ans[i].firstTown << " " << ans[i].secondTown << " " << ans[i].cost << "\n";
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// using namespace std;
+// int distinctIds(vector<int> &arr, int n, int mi)
+// {
+//   unordered_map<int, int> m;
+//   vector<pair<int, int>> v;
+//   int count = 0;
+//   for (int i = 0; i < n; i++)
+//     m[arr[i]]++;
+//   for (auto it = m.begin(); it != m.end(); it++)
+//     v.push_back(make_pair(it->second, it->first));
+//   sort(v.begin(), v.end());
+//   int size = v.size();
+//   for (int i = 0; i < size; i++)
+//   {
+//     if (v[i].first <= mi)
+//     {
+//       mi -= v[i].first;
+//       count++;
+//     }
+//     else
+//       return size - count;
+//   }
+//   return size - count;
+// }
+// int main()
+// {
+//   int n, k;
+//   cin >> n >> k;
+//   vector<int> arr(n, 0);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   cout << distinctIds(arr, n, k);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// #define ll long long
+// using namespace std;
+// int main()
+// {
+//   ll n, sum = 0, cost = 0;
+//   cin >> n;
+//   vector<ll> arr(n, 0);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//     sum += arr[i];
+//   }
+//   if (sum % n)
+//   {
+//     ll rem = 0, newSum, incr = 0, rep = 0;
+//     rem = sum / n;
+//     newSum = (rem + 1) * n;
+//     for (int i = 0; i < n; i++)
+//     {
+//       if (arr[i] > rem + 1)
+//       {
+//         rep += arr[i] - rem - 1;
+//       }
+//     }
+//     cost = newSum - sum + rep;
+//   }
+//   else
+//   {
+//     ll rem = sum / n;
+//     for (int i = 0; i < n; i++)
+//     {
+//       cost += abs(arr[i] - rem);
+//     }
+//     cost >>= 1;
+//   }
+//   cout << cost;
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int longestConsecutive(vector<int> &nums)
+// {
+//   int n = nums.size();
+//   map<int, int> mp, visit;
+//   for (int i = 0; i < n; i++)
+//   {
+//     mp[nums[i]] = INT_MAX;
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     if (mp.find(nums[i] - 1) != mp.end())
+//     {
+//       mp[nums[i] - 1] = nums[i];
+//     }
+//     else if (mp.find(nums[i] + 1) != mp.end())
+//     {
+//       mp[nums[i]] = nums[i] + 1;
+//     }
+//   }
+//   int maxSize = 0;
+//   for (auto i : mp)
+//   {
+//     int curr = i.first, cnt = 1;
+//     while (mp[curr] != INT_MAX)
+//     {
+//       if (visit[curr])
+//       {
+//         break;
+//       }
+//       cnt++;
+//       visit[curr] = 1;
+//       curr = mp[curr];
+//     }
+//     maxSize = max(cnt, maxSize);
+//   }
+//   return maxSize;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<int> arr(n);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   cout << longestConsecutive(arr);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int DFS(vector<vector<int>> &adj, int node, vector<int> &visited)
+// {
+//   visited[node] = 1;
+//   int k = 1;
+//   for (auto child : adj[node])
+//   {
+//     if (!visited[child])
+//     {
+//       k += DFS(adj, child, visited);
+//     }
+//   }
+//   return k;
+// }
+// vector<int> component(vector<vector<int>> &adj, vector<int> &visited)
+// {
+//   int comp = 0, maxSize = 0, n = adj.size();
+//   for (int i = 0; i < n; i++)
+//   {
+//     if (!visited[i])
+//     {
+//       comp++;
+//       maxSize = max(maxSize, DFS(adj, i, visited));
+//     }
+//   }
+//   return {comp, maxSize};
+// }
+// bool charDiff(string x, string y)
+// {
+//   string newY;
+//   map<char, int> mp;
+//   int n = x.size(), m = y.size();
+//   if (!n || !m)
+//   {
+//     return false;
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     mp[x[i]]++;
+//   }
+//   for (int i = 0; i < m; i++)
+//   {
+//     if (!mp[y[i]])
+//     {
+//       newY += y[i];
+//     }
+//     else
+//     {
+//       mp[y[i]]--;
+//     }
+//   }
+//   return (n - m + newY.size() <= 1) && (newY.size() <= 1);
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<string> words(n);
+//   vector<vector<int>> arr(n);
+//   vector<vector<string>> modified(28);
+//   vector<int> visited(n, 0), ans;
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> words[i];
+//     sort(words[i].begin(), words[i].end());
+//     modified[words[i].size()].push_back(words[i]);
+//   }
+//   int fori = 0, forj = 0;
+//   for (int k = 1; k < 26; k++)
+//   {
+//     sort(modified[k].begin(), modified[k].end());
+//     sort(modified[k + 1].begin(), modified[k + 1].end());
+//     forj += modified[k].size();
+//     for (int i = 0; i < modified[k].size(); i++)
+//     {
+//       for (int j = 0; j < modified[k + 1].size(); j++)
+//       {
+//         if (charDiff(modified[k][i], modified[k + 1][j]))
+//         {
+//           cout << fori << " " << forj + j << "\n";
+//           arr[fori].push_back(forj + j);
+//           arr[forj + j].push_back(fori);
+//         }
+//       }
+//       fori++;
+//     }
+//   }
+//   fori = 0, forj = 0;
+//   for (int k = 1; k < 27; k++)
+//   {
+//     forj += modified[k - 1].size();
+//     for (int i = 0; i < modified[k].size(); i++)
+//     {
+//       for (int j = i + 1; j < modified[k].size(); j++)
+//       {
+//         if (charDiff(modified[k][i], modified[k][j]))
+//         {
+//           arr[fori].push_back(forj);
+//           arr[forj].push_back(fori);
+//         }
+//       }
+//       fori++;
+//     }
+//   }
+//   ans = component(arr, visited);
+//   cout << ans[0] << " " << ans[1];
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// bool visited[1001][1001] = {{false}};
+// int dx[] = {-1, 0, 1, 0, -1, -1, 1, 1};
+// int dy[] = {0, 1, 0, -1, -1, 1, 1, -1};
+// bool isValid(int n, int m, int x, int y)
+// {
+//   if (x < 1 || y < 1 || x > n || y > m || visited[x][y])
+//   {
+//     return false;
+//   }
+//   return true;
+// }
+// int clusterFind(int **mat, int m, int n, int ran, int x, int y)
+// {
+//   queue<pair<int, int>> q;
+//   int xmin = min(0, x - ran);
+//   q.push({x, y});
+//   visited[x][y] = true;
+//   while (!q.empty())
+//   {
+//     int currx = q.front().first;
+//     int curry = q.front().second;
+//     q.pop();
+//     for (int i = 0; i < 8; i++)
+//     {
+//       int newx = currx + dx[i];
+//       int newy = curry + dy[i];
+//       if (isValid(n, m, newx, newy))
+//       {
+//         visited[newx][newy] = true;
+//         q.push({newx, newy});
+//       }
+//     }
+//   }
+// }
+// int main()
+// {
+//   int n, m, ran, x, y;
+//   cin >> n >> m;
+//   int arr[n][m];
+//   for (int i = 0; i < n; i++)
+//   {
+//     for (int j = 0; j < n; j++)
+//     {
+//       cin >> arr[i][j];
+//     }
+//   }
+//   cin >> ran >> x >> y;
+//   cout << clusertFind(arr, m, n, ran, x, y);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// long findTriplets(long n)
+// {
+//   set<long> mul, sing;
+//   for (long i = 1; i <= n; i++)
+//   {
+//     for (long j = i; j <= n; j++)
+//     {
+//       mul.insert(i * j);
+//     }
+//   }
+//   long cnt = 0;
+//   for (long i = 1; i <= n; i++)
+//   {
+//     auto it = mul.upper_bound(ceil(n / i));
+//     cnt += *it;
+//   }
+//   return cnt;
+// }
+// int main()
+// {
+//   long n;
+//   cin >> n;
+//   long result = findTriplets(n);
+//   cout << result;
+//   return 0;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<string> str(n);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> str[i];
+//   }
+//   map<char, int> mp;
+//   for (int i = 0; i < str.size(); i++)
+//   {
+//     for (int j = 0; j < str[i].size(); j++)
+//     {
+//       if (mp[str[i][j]] < i + 1)
+//       {
+//         mp[str[i][j]]++;
+//       }
+//     }
+//   }
+//   for (auto i : mp)
+//   {
+//     if (i.second == n)
+//     {
+//       cout << i.first << "\n";
+//     }
+//   }
+//   return 0;
+// }
+// int toDecimal(int num, int base)
+// {
+//   int ans = 0, i = 0;
+//   while (num)
+//   {
+//     int lastDigit = num % 10;
+//     ans += pow(base, i) * lastDigit;
+//     num /= 10;
+//     i++;
+//   }
+//   return ans;
+// }
+// string destinationBaseConvertor(int num, int base)
+// {
+//   string ans;
+//   while (num)
+//   {
+//     ans += to_string(num % base);
+//     num /= base;
+//   }
+//   reverse(ans.begin(), ans.end());
+//   return ans;
+// }
+// int main()
+// {
+//   int num1, base1, num2, base2, destinationBase;
+//   cin >> num1 >> base1 >> num2 >> base2 >> destinationBase;
+//   num1 = toDecimal(num1, base1);
+//   num2 = toDecimal(num2, base2);
+//   cout << destinationBaseConvertor(num1 + num2, destinationBase);
+//   return 0;
+// }
+// bool inverse(vector<int> &arr, vector<int> &inv)
+// {
+//   for (int i = 0; i < arr.size(); i++)
+//   {
+//     if (inv[arr[i]] != i)
+//     {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<int> arr(n, 0), inv(n, 0);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> inv[i];
+//   }
+//   cout << inverse(arr, inv);
+//   return 0;
+// }
+// int main()
+// {
+//   char[] c = new char[5];
+//   char[] c = new char();
+//   return 0;
+// }
+// int main()
+// {
+//   int n, k = 0, l = 0, mx1 = INT_MAX, mx2 = INT_MAX, mn1 = INT_MAX, mn2 = INT_MAX;
+//   cin >> n;
+//   vector<int> x(n, 0);
+//   vector<pair<int, int>> arr(n, {0, 0});
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> x[i];
+//     arr[i] = {x[i], i};
+//   }
+//   int ans = 2 * (x[0] + x[1]);
+//   k = n - 2, mx1 = x[0], mx2 = x[1], mn1 = x[1], mn2 = x[0];
+//   if (mx1 < mx2)
+//   {
+//     swap(mx1, mx2);
+//   }
+//   if (mn1 > mn2)
+//   {
+//     swap(mn1, mn2);
+//   }
+//   for (int i = 2; i < n; i++)
+//   {
+//     if (x[i] >= mx1)
+//     {
+//       mx2 = mx1;
+//       mx1 = x[i];
+//     }
+//     else if (x[i] >= mx2)
+//     {
+//       mn2 = mx2;
+//       mx2 = x[i];
+//     }
+//     else if (x[i] >= mn2)
+//     {
+//       mn1 = mn2;
+//       mn2 = x[i];
+//     }
+//   }
+//   return 0;
+// }
+// bool comp(pair<int, int> a, pair<int, int> b)
+// {
+//   if (a.first == b.first)
+//   {
+//     return a.second >= b.second;
+//   }
+//   return a.first >= b.first;
+// }
+// int minTime(vector<int> &rate, vector<int> &available)
+// {
+//   int MOD = 1e9 + 7, time = 0, pre = 0, n = rate.size();
+//   vector<pair<int, int>> arr(n, {0, 0});
+//   for (int i = 0; i < n; i++)
+//   {
+//     arr[i] = {rate[i], available[i]};
+//   }
+//   sort(arr.begin(), arr.end(), comp);
+//   time = arr[0].second;
+//   for (int i = 1; i < n; i++)
+//   {
+//     pre = arr[i].first;
+//     (time += arr[i].second + (pre * time) % MOD) %= MOD;
+//   }
+//   return time;
+// }
+// int main()
+// {
+//   int n;
+//   cin >> n;
+//   vector<int> rate(n, 0), available(n, 0);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> rate[i];
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> available[i];
+//   }
+//   cout << minTime(rate, available);
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   string s, pre, suf;
+//   cin >> s;
+//   int n = s.size(), ans = 0, lans = 0, reset = 0, idx = 0, lidx = 0;
+//   vector<char> st;
+//   for (int i = 0; i < n; i++){
+//     if (s[i] == '#'){
+//       st.push_back(s[i]);
+//       reset = 0;
+//     }
+//     else if (!reset && s[i] == '
+// {
+//       reset = 1;
+//       lidx = i;
+//     }
+//     else if (reset && s[i] == '
+// {
+//       if (!st.empty()){
+//         st.pop_back();
+//         lans += 2;
+//       }
+//       else{
+//         st.clear();
+//         lans = reset = 0;
+//       }
+//       if (ans < lans){
+//         ans = lans;
+//         idx = lidx;
+//       }
+//     }
+//   }
+//   for (int i = 0; i < ans / 2; i++){
+//     pre += '#';
+//     suf += '
+// ;
+//   }
+//   cout << (pre + '
+// + suf) << endl
+//        << idx << " ";
+//   return 0;
+// }
+// int main()
+// {
+//   vector<bool> is_prime(1000001, true);
+//   is_prime[0] = is_prime[1] = false;
+//   for (int i = 2; i <= 1000001; i++)
+//   {
+//     if (is_prime[i] && (long long)i * i <= 1000001)
+//     {
+//       for (int j = i * i; j <= 1000001; j += i)
+//         is_prime[j] = false;
+//     }
+//   }
+//   int x, y;
+//   cin >> x >> y;
+//   vector<int> ans;
+//   for (int i = x; i <= y; i++)
+//   {
+//     if (!is_prime[i])
+//     {
+//       ans.push_back(i);
+//     }
+//     else
+//     {
+//       if (ans.size() > 5)
+//       {
+//         cout << ans[0] << " " << ans.back() << " " << ans.size() << "\n";
+//       }
+//       ans.clear();
+//     }
+//   }
+//   return 0;
+// }
+// bool comp(pair<int, int> a, pair<int, int> b)
+// {
+//   if (b.second == a.second)
+//   {
+//     return b.first < a.first;
+//   }
+//   return b.second < a.second;
+// }
+// int main()
+// {
+//   int n, a, b;
+//   cin >> n;
+//   vector<pair<int, int>> arr(n);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> a >> b;
+//     arr[i] = {a, b};
+//   }
+//   sort(arr.begin(), arr.end(), comp);
+//   for (int i = n - 1; i >= 0; i--)
+//   {
+//     cout << arr[i].first << " ";
+//   }
+//   return 0;
+// }
+// long long calculate(long long p, long long q)
+// {
+//   long long mod = 998244353, expo;
+//   expo = mod - 2;
+
+//   // Loop to find the value
+//   // until the expo is not zero
+//   while (expo)
+//   {
+
+//     // Multiply p with q
+//     // if expo is odd
+//     if (expo & 1)
+//     {
+//       p = (p * q) % mod;
+//     }
+//     q = (q * q) % mod;
+
+//     // Reduce the value of
+//     // expo by 2
+//     expo >>= 1;
+//   }
+//   return p;
+// }
+// int main()
+// {
+//   int r, d;
+//   cin >> r >> d;
+//   double ans = (pow(r, 2) + (r * d)) / (d - r);
+//   cout << ans;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main(){
+//   string s1, s2;
+//   cin >> s1 >> s2;
+//   int l1 = s1.length(), l2 = s2.length(), ans = INT_MAX;
+//   if (l2 > l1){
+//     cout << -1 << endl;
+//     return 0;
+//   }
+//   for (int i = 0; i < l1 - l2 + 1; i++){
+//     string temp = s1.substr(0, i) + s2 + s1.substr(i + l2);
+//     int cost = 0;
+//     for (int j = i; j < i + l2; j++){
+//       if (s1[j] != temp[j])
+//         cost++;
+//     }
+//     int z = 0;
+//     for (int j = 0; j < ceil(l1 / 2.0); j++){
+//       if ((j < i || j >= i + l2) && temp[j] != temp[l1 - j - 1])
+//         cost++;
+//       else if (temp[j] != temp[l1 - j - 1] && (l1 - j - 1 < i || l1 - j - 1 >= i + l2))
+//         cost++;
+//       else if (temp[j] != temp[l1 - j - 1]){
+//         z = 1;
+//         break;
+//       }
+//     }
+//     if (z == 0)
+//       ans = min(ans, cost);
+//   }
+//   if (ans == INT_MAX)
+//     cout << -1 << endl;
+//   else
+//     cout << ans << endl;
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// long long solve(long long a, long long b){
+//   long long mx = max(a, b), mn = min(a, b), mnb = 0, mxb = 0, p = 1,bit = 0, cntmx = 0, cntmn = 0,newa = 0, newb = 0, temp, ans = 0;
+//   while (mx >= p){
+//     if (mx & p){
+//       cntmx++;
+//       mxb = max(mxb, bit);
+//     }
+//     p <<= 1, bit++;
+//   }
+//   bit = 0, p = 1;
+//   while (mn >= p){
+//     if (mn & p){
+//       cntmn++;
+//       mnb = max(mnb, bit);
+//     }
+//     p <<= 1, bit++;
+//   }
+//   temp = cntmx;
+//   while (temp){
+//     newa += pow(2, mxb);
+//     mxb--, temp--;
+//   }
+//   temp = cntmn;
+//   while (temp){
+//     newb += 1;
+//     newb <<= 1, temp--;
+//   }
+//   if (newa < newb){
+//     swap(newa, newb);
+//   }
+//   while (newa > newb){
+//     ans = max(ans, newa | newb);
+//     newb <<= 1;
+//   }
+//   return ans;
+// }
+// int main()
+// {
+//   long long a, b;
+//   cin >> a >> b;
+//   cout << solve(a, b);
+//   return 0;
+// }
+// typedef long long L;
+// int main()
+// {
+//   L T, a, b, q, l, r, c, d[40001];
+//   cin >> T;
+//   while (T--)
+//   {
+//     cin >> a >> b >> q;
+//     c = a * b / __gcd(a, b);
+//     for (L i = 0; i < c; i++)
+//     {
+//       d[i + 1] = d[i];
+//       if (i % a % b != i % b % a)
+//         ++d[i + 1];
+//     }
+//     while (q--)
+//     {
+//       cin >> l >> r;
+//       ++r;
+//       cout << (r / c - l / c) * d[c] + d[r % c] - d[l % c] << " ";
+//     }
+//     cout << endl;
+//   }
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// static int cnt = 5;
+// void func(void)
+// {
+//   static int i = 5;
+//   i++;
+//   cout << i << " " << cnt << endl;
+// }
+// int main()
+// {
+//   while (cnt--)
+//   {
+//     func();
+//   }
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   int n, k = 0;
+//   cin >> n;
+//   set<int> s;
+//   vector<int> arr(n, 0);
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[n];
+//     s.insert(arr[i]);
+//   }
+//   for (int i = 0; i < n - 1; i++)
+//   {
+//     if (arr[i] < arr[i + 1])
+//     {
+//       k++;
+//     }
+//   }
+//   if (k == n - 1 || s.size() == n)
+//   {
+//     cout << "Bad\n";
+//   }
+//   else
+//   {
+//     cout << "Good\n";
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// string dec_to_binary(int n)
+// {
+//   string s;
+//   for (int i = 15; i >= 0; --i)
+//   {
+//     int temp = n >> i;
+//     s += (temp & 1) ? '1' : '0';
+//   }
+//   return s;
+// }
+// int main()
+// {
+//   int n, k, r, ans = 0, cool;
+//   cin >> r >> k;
+//   for (int num = 1; num <= r; ++num)
+//   {
+//     cool = 0;
+//     string s = dec_to_binary(num);
+//     for (int i = 0; i < s.length(); ++i)
+//     {
+//       string temp = s.substr(i, 3);
+//       if (temp == "101")
+//       {
+//         ++cool;
+//       }
+//     }
+//     if (cool >= k)
+//     {
+//       ++ans;
+//     }
+//   }
+//   cout << ans << "\n";
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// void build(int l, int r, int v, vector<int> &tree, int n)
+// {
+//   if (l == r)
+//   {
+//     tree[v] = (l < n) ? l : 0;
+//     cout << v << " " << tree[v] << "\n";
+//   }
+//   else
+//   {
+//     int mid = (l + r) >> 1, a = v << 1, b = v << 1 | 1;
+//     build(l, mid, a, tree, n);
+//     build(mid + 1, r, b, tree, n);
+//     // tree[v] = 0;
+//   }
+//   return;
+// }
+// void update(int l, int r, int v, int q1, int q2, int val, vector<int> &tree)
+// {
+//   if (q1 > q2)
+//   {
+//     return;
+//   }
+//   if (l >= q1 && r <= q2)
+//   {
+//     tree[v] += val;
+//   }
+//   else
+//   {
+//     int mid = (l + r) >> 1, a = v << 1, b = v << 1 | 1;
+//     update(l, mid, a, q1, min(mid, q2), val, tree);
+//     update(mid + 1, r, b, q1, max(mid + 1, q2), val, tree);
+//   }
+//   return;
+// }
+// int query(int l, int r, int v, int pos, vector<int> &tree)
+// {
+//   if (l == r)
+//   {
+//     return tree[v];
+//   }
+//   int mid = (l + r) >> 1, a = v << 1, b = v << 1 | 1;
+//   if (pos <= mid)
+//   {
+//     return tree[v] + query(l, mid, a, pos, tree);
+//   }
+//   return tree[v] + query(mid + 1, r, b, pos, tree);
+// }
+// int main()
+// {
+//   int n, q, x, idx, ln;
+//   cin >> n >> q;
+//   vector<int> arr(n + q), tree(4 * (n + q), 0);
+//   ln = n;
+//   map<int, queue<int>> mp;
+//   for (int i = 0; i < n; i++)
+//   {
+//     cin >> arr[i];
+//   }
+//   for (int i = 0; i < n; i++)
+//   {
+//     mp[arr[i]].push(i);
+//   }
+//   build(0, n + q - 1, 1, tree, n);
+//   for (int i = 1; i < 20; i++)
+//   {
+//     cout << tree[i] << " ";
+//   }
+//   cout << "\n";
+//   while (q--)
+//   {
+//     cin >> x;
+//     idx = mp[x].front(), mp[x].pop();
+//     cout << query(0, n + q - 1, 1, idx, tree) << "\n";
+//     mp[x].push(n);
+//     update(0, n + q - 1, 1, idx, idx, -1, tree);
+//     ln += 1;
+//     update(0, n + q - 1, 1, idx, ln - 1, -1, tree);
+//   }
+//   return 0;
+// }
+// #include <bits/stdc++.h>
+// using namespace std;
+// int main()
+// {
+//   int n;
+//   cin >> n;
+// vector<vector<int>> arr(n + 1, vector<int>(log2(n) + 1, -1));
+// for (int i = 1; i <= n; i++)
+// {
+//   cin >> arr[i][0];
+// }
+// for (int j = 1; (1 << j) < n; j++)
+// {
+//   for (int i = 1; i <= n; i++)
+//   {
+//     if (arr[i][j - 1] != -1)
+//     {
+//       arr[i][j] = arr[arr[i][j - 1]][j - 1];
+//     }
+//   }
+// }
+// for (int i = 0; i <= n; i++)
+// {
+//   for (int j = 0; j < log2(n); j++)
+//   {
+//     cout << arr[i][j] << " ";
+//   }
+//   cout << endl;
+// }
+//   cout << (2 < log2(n));
+//   return 0;
+// }
 // #include <bits/stdc++.h>
 // using namespace std;
 // struct Node
